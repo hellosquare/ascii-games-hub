@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#050807" />
+  <title>Play | ASCII Games Hub</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="play-page">
+  <main class="runner-shell">
+    <header class="runner-header">
+      <a class="terminal-link" href="index.html">&lt; BACK TO HUB</a>
+      <div>
+        <div class="eyebrow">[ PYTHON GAME TERMINAL ]</div>
+        <h1 id="game-title">Loading game...</h1>
+      </div>
+      <button id="restart-button" class="terminal-button" type="button">RESTART GAME</button>
+    </header>
+
+    <section class="terminal-frame" aria-label="Python game terminal">
+      <div class="terminal-bar">
+        <span class="status-dot"></span>
+        <span id="status-text">INITIALIZING PYTHON...</span>
+      </div>
+      <div id="terminal-output" class="terminal-output" role="log" aria-live="polite"></div>
+      <form id="terminal-form" class="terminal-input-row" autocomplete="off">
+        <label for="terminal-input" class="prompt-symbol">&gt;</label>
+        <input id="terminal-input" type="text" spellcheck="false" autocomplete="off" disabled aria-label="Game input" />
+        <button class="send-button" type="submit" disabled>ENTER</button>
+      </form>
+    </section>
+
+    <p id="runner-note" class="runner-note">Python runs locally in your browser. Nothing you type is sent to a server.</p>
+  </main>
+
+  <script src="runner.js"></script>
+</body>
+</html>
