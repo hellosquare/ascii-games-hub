@@ -1,166 +1,240 @@
-const PYODIDE_VERSION = '314.0.7';
-
-const PYODIDE_SOURCES = [
-  {
-    script: `https://cdn.jsdelivr.net/pyodide/v${PYODIDE_VERSION}/full/pyodide.js`,
-    base: `https://cdn.jsdelivr.net/pyodide/v${PYODIDE_VERSION}/full/`
-  },
-  {
-    script: `https://cdn.jsdelivr.net/npm/pyodide@${PYODIDE_VERSION}/pyodide.js`,
-    base: `https://cdn.jsdelivr.net/npm/pyodide@${PYODIDE_VERSION}/`
-  }
-];
+const PYODIDE_BASE =
+  'https://cdn.jsdelivr.net/pyodide/v314.0.7/full/';
 
 let sharedBuffer;
 let control;
 let textBuffer;
 let pyodide;
 
-// --------------------------------------------------
-// LOAD PYODIDE WITH FALLBACK
-// --------------------------------------------------
+
+// ------------------------------------------------------------
+// LOAD PYODIDE AS AN ES MODULE
+// ------------------------------------------------------------
 
 async function initializePyodide() {
-  if (pyodide) return pyodide;
-
-  let lastError = null;
-
-  for (const source of PYODIDE_SOURCES) {
-    try {
-      importScripts(source.script);
-
-      pyodide = await loadPyodide({
-        indexURL: source.base
-      });
-
-      return pyodide;
-    } catch (error) {
-      lastError = error;
-    }
+  if (pyodide) {
+    return pyodide;
   }
 
-  throw new Error(
-    `Could not load Pyodide from any CDN.\n\n${String(lastError)}`
+  const module = await import(
+    `${PYODIDE_BASE}pyodide.mjs`
   );
+
+  pyodide = await module.loadPyodide({
+    indexURL: PYODIDE_BASE
+  });
+
+  return pyodide;
 }
 
 
-// --------------------------------------------------
-// READ INPUT FROM THE HTML TERMINAL
-// --------------------------------------------------
+// ------------------------------------------------------------
+// GET INPUT FROM THE WEBSITE TERMINAL
+// ------------------------------------------------------------
 
 function readTerminalInput(promptText = '') {
+
+  // Reset shared input state
   Atomics.store(control, 0, 0);
   Atomics.store(control, 1, 0);
 
+  // Tell runner.js we need input
   self.postMessage({
     type: 'input',
     prompt: String(promptText)
   });
 
-  // Worker pauses here until runner.js wakes it up.
-  Atomics.wait(control, 0, 0);
+  // Pause Python until the player submits an answer.
+  // This is safe because we're inside a Web Worker.
+  Atomics.wait(
+    control,
+    0,
+    0
+  );
 
-  const length = Atomics.load(control, 1);
+  const length = Atomics.load(
+    control,
+    1
+  );
 
   let result = '';
+
   const chunkSize = 4096;
 
-  for (let start = 0; start < length; start += chunkSize) {
+  for (
+    let start = 0;
+    start < length;
+    start += chunkSize
+  ) {
+
     const chunk = textBuffer.subarray(
       start,
-      Math.min(start + chunkSize, length)
+      Math.min(
+        start + chunkSize,
+        length
+      )
     );
 
-    result += String.fromCharCode(...chunk);
+    result += String.fromCharCode(
+      ...chunk
+    );
   }
 
   return result;
 }
 
 
-// --------------------------------------------------
-// RUN STUDENT GAME
-// --------------------------------------------------
+// ------------------------------------------------------------
+// RECEIVE GAME FROM runner.js
+// ------------------------------------------------------------
 
 self.onmessage = async event => {
-  if (event.data.type !== 'run') return;
 
-  sharedBuffer = event.data.sharedBuffer;
-  control = new Int32Array(sharedBuffer, 0, 2);
-  textBuffer = new Uint16Array(sharedBuffer, 8);
+  if (event.data.type !== 'run') {
+    return;
+  }
+
+  sharedBuffer =
+    event.data.sharedBuffer;
+
+  control =
+    new Int32Array(
+      sharedBuffer,
+      0,
+      2
+    );
+
+  textBuffer =
+    new Uint16Array(
+      sharedBuffer,
+      8
+    );
 
   try {
+
+    // --------------------------------------------------------
+    // START PYTHON
+    // --------------------------------------------------------
+
     await initializePyodide();
 
-    // Send normal Python output to the terminal.
+
+    // --------------------------------------------------------
+    // SEND PRINT() OUTPUT TO THE WEBSITE
+    // --------------------------------------------------------
+
     pyodide.setStdout({
+
       batched: text => {
+
         self.postMessage({
           type: 'stdout',
           text: `${text}\n`
         });
+
       }
+
     });
 
-    // Send Python errors/warnings to the terminal.
+
+    // --------------------------------------------------------
+    // SEND PYTHON ERRORS TO THE WEBSITE
+    // --------------------------------------------------------
+
     pyodide.setStderr({
+
       batched: text => {
+
         self.postMessage({
           type: 'stderr',
           text
         });
+
       }
+
     });
 
-    // Make our JavaScript terminal-input function available in Python.
+
+    // --------------------------------------------------------
+    // CONNECT OUR HTML TERMINAL TO PYTHON input()
+    // --------------------------------------------------------
+
     pyodide.globals.set(
       'terminal_input',
       readTerminalInput
     );
 
+
+    // Python is ready!
     self.postMessage({
       type: 'ready'
     });
 
 
-    // --------------------------------------------------
-    // CUSTOM input()
-    //
-    // Replace Python's normal input() with our website
-    // terminal version.
-    // --------------------------------------------------
+    // --------------------------------------------------------
+    // REPLACE PYTHON input()
+    // --------------------------------------------------------
 
     const wrappedCode = `
 import builtins
 
 def _browser_input(prompt=''):
-    return str(terminal_input(str(prompt)))
+    return str(
+        terminal_input(
+            str(prompt)
+        )
+    )
 
 builtins.input = _browser_input
+
 
 ${event.data.code}
 `;
 
+
+    // --------------------------------------------------------
+    // RUN STUDENT CODE
+    // --------------------------------------------------------
+
     try {
-      await pyodide.runPythonAsync(wrappedCode);
+
+      await pyodide.runPythonAsync(
+        wrappedCode
+      );
+
 
       self.postMessage({
         type: 'done'
       });
 
+
     } catch (error) {
+
       const errorText =
-        error && error.message
+        error &&
+        error.message
           ? error.message
           : String(error);
 
-      // Students use exit() and quit() to end games.
-      // Pyodide reports that as SystemExit.
-      // Treat it as a normal game ending.
+
+      // ------------------------------------------------------
+      // NORMAL GAME EXIT
+      //
+      // Students may use:
+      //
+      // exit()
+      // quit()
+      //
+      // Python throws SystemExit internally.
+      // That should NOT appear as an error to the player.
+      // ------------------------------------------------------
+
       if (
-        errorText.includes('SystemExit')
+        errorText.includes(
+          'SystemExit'
+        )
       ) {
+
         self.postMessage({
           type: 'done'
         });
@@ -168,16 +242,25 @@ ${event.data.code}
         return;
       }
 
+
       throw error;
     }
 
+
   } catch (error) {
+
     self.postMessage({
+
       type: 'error',
+
       error:
-        error && error.message
+        error &&
+        error.message
           ? error.message
           : String(error)
+
     });
+
   }
+
 };
