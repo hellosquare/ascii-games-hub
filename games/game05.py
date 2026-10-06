@@ -2,7 +2,6 @@
 import time
 import random
  
- 
 # ==========================================
 # TYPEWRITER
 # ==========================================
@@ -14,7 +13,6 @@ def typewriter(text, delay=0.02):
     print()
 
 #CONSTANTS---------------
-
 
 #VARIABLES--------------
 #make sure you declare your values here at the start
