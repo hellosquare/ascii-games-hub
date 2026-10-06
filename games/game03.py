@@ -33,13 +33,7 @@ print()
 print("Can you make the perfect dish?")
 print()
 
-
 input("Press ENTER to begin!")
-
-
-print("Press SPACE to begin!")
-input=()
-print()
 
 #EventOne
 print("A strange order has arrived...")
@@ -50,13 +44,9 @@ MAX_MISTAKE=3
 while mistake < MAX_MISTAKE: 
 
     print("Ingredient 1:")
-
     print("I swim through the ocean, but I'm not a whale. ")
-
     print("I have scales, but I am not a dragon.")
-
     print("I can travel upstream when it is time to lay my eggs.")
-
     print("What am I?")
 
 
@@ -76,10 +66,7 @@ while mistake < MAX_MISTAKE:
             print("Oops! You are out of attempts.")
             print("Salmon will not be added to the recipe.")
 
-
-
 print("Moving on to the next ingredient...")
-
 
 mistake=0
 MAX_MISTAKE=3
@@ -90,7 +77,6 @@ while mistake < MAX_MISTAKE:
     print("I begin my life in a muddy field, and I grow in rows beside the water.")
     print("I am not wheat, but people grind and cook me before I become soft and fluffy.")
     print("What am I?")
-
 
     riddleRice = input("Enter your guess:").lower()
 
