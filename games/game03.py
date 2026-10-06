@@ -1,4 +1,3 @@
-#adding art tomorrow
 
 #constants:
 score=100
