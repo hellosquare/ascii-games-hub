@@ -8,7 +8,7 @@ let pyodide;
 
 
 // ------------------------------------------------------------
-// LOAD PYODIDE AS AN ES MODULE
+// LOAD PYODIDE
 // ------------------------------------------------------------
 
 async function initializePyodide() {
@@ -29,23 +29,22 @@ async function initializePyodide() {
 
 
 // ------------------------------------------------------------
-// GET INPUT FROM THE WEBSITE TERMINAL
+// READ PLAYER INPUT FROM THE WEBSITE TERMINAL
 // ------------------------------------------------------------
 
 function readTerminalInput(promptText = '') {
 
-  // Reset shared input state
+  // Reset input state
   Atomics.store(control, 0, 0);
   Atomics.store(control, 1, 0);
 
-  // Tell runner.js we need input
+  // Tell runner.js that Python is waiting for input
   self.postMessage({
     type: 'input',
     prompt: String(promptText)
   });
 
-  // Pause Python until the player submits an answer.
-  // This is safe because we're inside a Web Worker.
+  // Pause the worker until the player submits an answer
   Atomics.wait(
     control,
     0,
@@ -85,7 +84,7 @@ function readTerminalInput(promptText = '') {
 
 
 // ------------------------------------------------------------
-// RECEIVE GAME FROM runner.js
+// RECEIVE GAME CODE FROM runner.js
 // ------------------------------------------------------------
 
 self.onmessage = async event => {
@@ -120,21 +119,30 @@ self.onmessage = async event => {
 
 
     // --------------------------------------------------------
-    // SEND PRINT() OUTPUT TO THE WEBSITE
+    // RAW PYTHON OUTPUT
+    //
+    // Important:
+    // using RAW output lets the browser terminal correctly
+    // handle \r carriage returns used by loading bars,
+    // animations, blinking text, etc.
     // --------------------------------------------------------
 
-pyodide.setStdout({
-  raw: byte => {
-    self.postMessage({
-      type: 'stdout-byte',
-      byte: byte
+    pyodide.setStdout({
+
+      raw: byte => {
+
+        self.postMessage({
+          type: 'stdout-byte',
+          byte
+        });
+
+      }
+
     });
-  }
-});
 
 
     // --------------------------------------------------------
-    // SEND PYTHON ERRORS TO THE WEBSITE
+    // PYTHON ERROR OUTPUT
     // --------------------------------------------------------
 
     pyodide.setStderr({
@@ -152,7 +160,7 @@ pyodide.setStdout({
 
 
     // --------------------------------------------------------
-    // CONNECT OUR HTML TERMINAL TO PYTHON input()
+    // CONNECT JAVASCRIPT INPUT TO PYTHON
     // --------------------------------------------------------
 
     pyodide.globals.set(
@@ -161,14 +169,14 @@ pyodide.setStdout({
     );
 
 
-    // Python is ready!
+    // Tell the website Python is ready
     self.postMessage({
       type: 'ready'
     });
 
 
     // --------------------------------------------------------
-    // REPLACE PYTHON input()
+    // REPLACE PYTHON'S NORMAL input()
     // --------------------------------------------------------
 
     const wrappedCode = `
@@ -189,7 +197,7 @@ ${event.data.code}
 
 
     // --------------------------------------------------------
-    // RUN STUDENT CODE
+    // RUN STUDENT GAME
     // --------------------------------------------------------
 
     try {
@@ -214,15 +222,12 @@ ${event.data.code}
 
 
       // ------------------------------------------------------
-      // NORMAL GAME EXIT
+      // HANDLE exit() / quit()
       //
-      // Students may use:
+      // Students often use exit() to end their games.
+      // Pyodide treats that internally as SystemExit.
       //
-      // exit()
-      // quit()
-      //
-      // Python throws SystemExit internally.
-      // That should NOT appear as an error to the player.
+      // We want it to count as a normal game ending.
       // ------------------------------------------------------
 
       if (
