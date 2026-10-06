@@ -230,4 +230,76 @@ button, input { font: inherit; }
   .terminal-button { grid-column: 2; grid-row: 2; }
   .site-footer { grid-template-columns: 1fr; justify-items: center; gap: 20px; padding-bottom: 18px; }
   .site-footer pre { order: 2; }
+
+  
+  /* =========================================
+   ANSI TERMINAL COLORS
+   ========================================= */
+
+.ansi-black {
+  color: #555555;
+}
+
+.ansi-red {
+  color: #ff5f5f;
+}
+
+.ansi-green {
+  color: #6dff85;
+}
+
+.ansi-yellow {
+  color: #ffd75f;
+}
+
+.ansi-blue {
+  color: #5f87ff;
+}
+
+.ansi-magenta {
+  color: #d787ff;
+}
+
+.ansi-cyan {
+  color: #5fffff;
+}
+
+.ansi-white {
+  color: #f1f1f1;
+}
+
+
+/* Bright ANSI colors */
+
+.ansi-bright-black {
+  color: #888888;
+}
+
+.ansi-bright-red {
+  color: #ff8787;
+}
+
+.ansi-bright-green {
+  color: #87ff9f;
+}
+
+.ansi-bright-yellow {
+  color: #ffff87;
+}
+
+.ansi-bright-blue {
+  color: #87afff;
+}
+
+.ansi-bright-magenta {
+  color: #ff87ff;
+}
+
+.ansi-bright-cyan {
+  color: #87ffff;
+}
+
+.ansi-bright-white {
+  color: #ffffff;
+}
 }
