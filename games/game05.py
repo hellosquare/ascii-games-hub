@@ -67,7 +67,6 @@ input("Press ENTER to begin your journey...")
  
 typewriter("")
 typewriter("Before your adventure begins, you must choose who you are.")
->>>>>>> 64138869a02cc0b30f38218663128f183a7ae073
 typewriter("")
  
 input("Press ENTER to start...")
@@ -109,14 +108,11 @@ typewriter("1. Super Strength")
 typewriter("2. Fire Magic")
 typewriter("3. Super Speed")
 typewriter("")
-<<<<<<< HEAD
-=======
 typewriter("1. Super Strength  - 5 Lives") #you can make the lives as a constant
 typewriter("2. Super Speed     - 4 Lives")
 typewriter("3. Fire Magic      - 3 Lives")
 typewriter("4. Ice Blast       - 3 Lives")
 typewriter("5. Teleportation   - 3 Lives")
->>>>>>> 64138869a02cc0b30f38218663128f183a7ae073
  
 choice = input("Choose 1, 2, or 3: ")
  
