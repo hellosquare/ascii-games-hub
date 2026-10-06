@@ -13,8 +13,12 @@ let textBuffer = null;
 let currentGame = null;
 let waitingForInput = false;
 
-// Used to simulate terminal-style output
+// Terminal rendering state
 let terminalCurrentLine = null;
+let terminalCurrentSpan = null;
+let currentAnsiClass = '';
+let ansiBuffer = '';
+let readingAnsi = false;
 let utf8Decoder = new TextDecoder('utf-8');
 
 const params = new URLSearchParams(location.search);
@@ -40,8 +44,7 @@ async function boot() {
       'error'
     );
 
-    statusText.textContent =
-      'TERMINAL CONFIGURATION ERROR';
+    statusText.textContent = 'TERMINAL CONFIGURATION ERROR';
 
     return;
   }
@@ -55,12 +58,10 @@ async function boot() {
     const games = await gamesResponse.json();
 
     currentGame =
-      games.find(
-        game => game.id === requestedGameId
-      ) || games[0];
+      games.find(game => game.id === requestedGameId) ||
+      games[0];
 
-    gameTitle.textContent =
-      currentGame.title;
+    gameTitle.textContent = currentGame.title;
 
     document.title =
       `${currentGame.title} | ASCII Games Hub`;
@@ -75,8 +76,7 @@ async function boot() {
       'error'
     );
 
-    statusText.textContent =
-      'FAILED TO LOAD GAME';
+    statusText.textContent = 'FAILED TO LOAD GAME';
   }
 }
 
@@ -87,27 +87,22 @@ async function startGame() {
 
   output.innerHTML = '';
 
-  // Reset terminal output state
-  terminalCurrentLine = null;
-  utf8Decoder = new TextDecoder('utf-8');
+  resetTerminalState();
 
   waitingForInput = false;
-
   setInputEnabled(false);
 
-  statusText.textContent =
-    'LOADING GAME...';
+  statusText.textContent = 'LOADING GAME...';
 
   writeLine(
     '> INITIALIZING PYTHON...',
     'system'
   );
 
-  const gameResponse =
-    await fetch(
-      currentGame.file,
-      { cache: 'no-store' }
-    );
+  const gameResponse = await fetch(
+    currentGame.file,
+    { cache: 'no-store' }
+  );
 
   if (!gameResponse.ok) {
     throw new Error(
@@ -115,15 +110,8 @@ async function startGame() {
     );
   }
 
-  const code =
-    await gameResponse.text();
+  const code = await gameResponse.text();
 
-  // 2 Int32 values:
-  // [0] input state
-  // [1] input length
-  //
-  // Remaining memory stores
-  // UTF-16 player input.
   sharedBuffer =
     new SharedArrayBuffer(65536);
 
@@ -140,29 +128,23 @@ async function startGame() {
       8
     );
 
-  // IMPORTANT:
-  // Pyodide 314 uses an ES module worker.
-  worker =
-    new Worker(
-      'python-worker.js',
-      { type: 'module' }
+  worker = new Worker(
+    'python-worker.js',
+    { type: 'module' }
+  );
+
+  worker.onmessage = handleWorkerMessage;
+
+  worker.onerror = event => {
+    writeLine(
+      `WORKER ERROR: ${event.message}`,
+      'error'
     );
 
-  worker.onmessage =
-    handleWorkerMessage;
+    statusText.textContent = 'GAME STOPPED';
 
-  worker.onerror =
-    event => {
-      writeLine(
-        `WORKER ERROR: ${event.message}`,
-        'error'
-      );
-
-      statusText.textContent =
-        'GAME STOPPED';
-
-      setInputEnabled(false);
-    };
+    setInputEnabled(false);
+  };
 
   worker.postMessage({
     type: 'run',
@@ -172,16 +154,14 @@ async function startGame() {
 }
 
 function handleWorkerMessage(event) {
-  const message =
-    event.data;
+  const message = event.data;
 
   // -----------------------------
   // PYTHON READY
   // -----------------------------
 
   if (message.type === 'ready') {
-    statusText.textContent =
-      'RUNNING';
+    statusText.textContent = 'RUNNING';
 
     writeLine(
       '> PYTHON READY. STARTING GAME...',
@@ -194,33 +174,20 @@ function handleWorkerMessage(event) {
   }
 
   // -----------------------------
-  // RAW TERMINAL OUTPUT
-  //
-  // This is the important part
-  // that handles \r properly.
+  // RAW PYTHON OUTPUT
   // -----------------------------
 
   if (message.type === 'stdout-byte') {
-    handleTerminalByte(
-      message.byte
-    );
-
+    handleTerminalByte(message.byte);
     return;
   }
 
   // -----------------------------
-  // OLD/FALLBACK STDOUT
-  //
-  // Keeping this here means the
-  // runner still works if stdout
-  // is ever sent normally.
+  // FALLBACK STDOUT
   // -----------------------------
 
   if (message.type === 'stdout') {
-    writeText(
-      message.text
-    );
-
+    writeText(message.text);
     return;
   }
 
@@ -244,9 +211,7 @@ function handleWorkerMessage(event) {
   if (message.type === 'input') {
 
     if (message.prompt) {
-      writeText(
-        message.prompt
-      );
+      writeText(message.prompt);
     }
 
     waitingForInput = true;
@@ -273,8 +238,8 @@ function handleWorkerMessage(event) {
     statusText.textContent =
       'GAME COMPLETE';
 
-    // Finish any unfinished output line
     terminalCurrentLine = null;
+    terminalCurrentSpan = null;
 
     writeLine('');
 
@@ -299,6 +264,7 @@ function handleWorkerMessage(event) {
       'PYTHON ERROR';
 
     terminalCurrentLine = null;
+    terminalCurrentSpan = null;
 
     writeLine('');
 
@@ -309,8 +275,9 @@ function handleWorkerMessage(event) {
   }
 }
 
+
 // --------------------------------------------------
-// PLAYER SUBMITS INPUT
+// PLAYER INPUT
 // --------------------------------------------------
 
 form.addEventListener(
@@ -323,12 +290,10 @@ form.addEventListener(
       return;
     }
 
-    const answer =
-      input.value;
+    const answer = input.value;
 
-    // Make sure typed input begins
-    // on its own display line.
     terminalCurrentLine = null;
+    terminalCurrentSpan = null;
 
     writeLine(
       `> ${answer}`,
@@ -341,8 +306,7 @@ form.addEventListener(
 
     setInputEnabled(false);
 
-    statusText.textContent =
-      'RUNNING';
+    statusText.textContent = 'RUNNING';
 
     const safeAnswer =
       answer.slice(
@@ -379,8 +343,9 @@ form.addEventListener(
   }
 );
 
+
 // --------------------------------------------------
-// RESTART BUTTON
+// RESTART
 // --------------------------------------------------
 
 restartButton.addEventListener(
@@ -401,30 +366,45 @@ restartButton.addEventListener(
   }
 );
 
+
 // --------------------------------------------------
 // ENABLE / DISABLE INPUT
 // --------------------------------------------------
 
 function setInputEnabled(enabled) {
-  input.disabled =
-    !enabled;
-
-  sendButton.disabled =
-    !enabled;
+  input.disabled = !enabled;
+  sendButton.disabled = !enabled;
 }
 
+
 // --------------------------------------------------
-// WRITE A COMPLETE LINE
+// RESET TERMINAL STATE
+// --------------------------------------------------
+
+function resetTerminalState() {
+  terminalCurrentLine = null;
+  terminalCurrentSpan = null;
+
+  currentAnsiClass = '';
+
+  ansiBuffer = '';
+  readingAnsi = false;
+
+  utf8Decoder =
+    new TextDecoder('utf-8');
+}
+
+
+// --------------------------------------------------
+// WRITE NORMAL COMPLETE LINE
 // --------------------------------------------------
 
 function writeLine(
   text = '',
   className = ''
 ) {
-
-  // Any normal writeLine call means
-  // we are starting a new line.
   terminalCurrentLine = null;
+  terminalCurrentSpan = null;
 
   const line =
     document.createElement('div');
@@ -432,160 +412,326 @@ function writeLine(
   line.className =
     `terminal-line ${className}`.trim();
 
-  line.textContent =
-    text;
+  line.textContent = text;
 
-  output.appendChild(
-    line
-  );
+  output.appendChild(line);
 
   output.scrollTop =
     output.scrollHeight;
 }
+
 
 // --------------------------------------------------
 // WRITE NORMAL TEXT
 // --------------------------------------------------
 
 function writeText(text = '') {
-
-  const normalized =
-    String(text)
-      .replace(
-        /\r\n/g,
-        '\n'
-      );
-
-  const parts =
-    normalized.split('\n');
-
-  parts.forEach(
-    (part, index) => {
-
-      if (
-        index <
-        parts.length - 1
-      ) {
-        writeLine(
-          part
-        );
-
-      } else if (
-        part !== ''
-      ) {
-
-        const line =
-          getCurrentTerminalLine();
-
-        line.textContent +=
-          part;
-
-        output.scrollTop =
-          output.scrollHeight;
-      }
-
-    }
-  );
+  for (const character of String(text)) {
+    handleTerminalCharacter(character);
+  }
 }
 
+
 // --------------------------------------------------
-// GET OR CREATE CURRENT TERMINAL LINE
+// GET CURRENT TERMINAL LINE
 // --------------------------------------------------
 
 function getCurrentTerminalLine() {
-
   if (!terminalCurrentLine) {
-
     terminalCurrentLine =
       document.createElement('div');
 
     terminalCurrentLine.className =
       'terminal-line';
 
-    terminalCurrentLine.textContent =
-      '';
-
     output.appendChild(
       terminalCurrentLine
     );
 
+    terminalCurrentSpan = null;
   }
 
   return terminalCurrentLine;
 }
 
+
 // --------------------------------------------------
-// HANDLE RAW PYTHON OUTPUT BYTE
-//
-// This makes browser output behave
-// more like a real terminal.
+// GET CURRENT COLORED SPAN
+// --------------------------------------------------
+
+function getCurrentTerminalSpan() {
+  const line =
+    getCurrentTerminalLine();
+
+  if (
+    !terminalCurrentSpan ||
+    terminalCurrentSpan.dataset.ansiClass !== currentAnsiClass
+  ) {
+    terminalCurrentSpan =
+      document.createElement('span');
+
+    terminalCurrentSpan.dataset.ansiClass =
+      currentAnsiClass;
+
+    if (currentAnsiClass) {
+      terminalCurrentSpan.className =
+        currentAnsiClass;
+    }
+
+    line.appendChild(
+      terminalCurrentSpan
+    );
+  }
+
+  return terminalCurrentSpan;
+}
+
+
+// --------------------------------------------------
+// RAW BYTE FROM PYTHON
 // --------------------------------------------------
 
 function handleTerminalByte(byte) {
-
-  // -----------------------------
-  // NEWLINE \n
-  // -----------------------------
-
-  if (byte === 10) {
-
-    terminalCurrentLine =
-      null;
-
-    output.scrollTop =
-      output.scrollHeight;
-
-    return;
-  }
-
-  // -----------------------------
-  // CARRIAGE RETURN \r
-  //
-  // This is what progress bars
-  // and blinking text use.
-  //
-  // Instead of creating a new
-  // line, clear the current line
-  // and rewrite it.
-  // -----------------------------
-
-  if (byte === 13) {
-
-    const line =
-      getCurrentTerminalLine();
-
-    line.textContent =
-      '';
-
-    output.scrollTop =
-      output.scrollHeight;
-
-    return;
-  }
-
-  // -----------------------------
-  // NORMAL UTF-8 CHARACTER
-  // -----------------------------
-
-  const text =
+  const decoded =
     utf8Decoder.decode(
-      new Uint8Array([
-        byte
-      ]),
-      {
-        stream: true
-      }
+      new Uint8Array([byte]),
+      { stream: true }
     );
 
-  if (text) {
+  if (!decoded) {
+    return;
+  }
 
-    const line =
-      getCurrentTerminalLine();
+  for (const character of decoded) {
+    handleTerminalCharacter(character);
+  }
+}
 
-    line.textContent +=
-      text;
+
+// --------------------------------------------------
+// HANDLE TERMINAL CHARACTER
+// --------------------------------------------------
+
+function handleTerminalCharacter(character) {
+
+  // -----------------------------
+  // Currently reading an ANSI code
+  // -----------------------------
+
+  if (readingAnsi) {
+    ansiBuffer += character;
+
+    // ANSI color commands normally end with "m"
+    if (character === 'm') {
+      applyAnsiCode(ansiBuffer);
+
+      ansiBuffer = '';
+      readingAnsi = false;
+    }
+
+    // Avoid broken / endless ANSI sequences
+    else if (ansiBuffer.length > 30) {
+      ansiBuffer = '';
+      readingAnsi = false;
+    }
+
+    return;
+  }
+
+
+  // -----------------------------
+  // ESCAPE character starts ANSI
+  // -----------------------------
+
+  if (character === '\x1b') {
+    readingAnsi = true;
+    ansiBuffer = '';
+
+    return;
+  }
+
+
+  // -----------------------------
+  // NEWLINE
+  // -----------------------------
+
+  if (character === '\n') {
+    terminalCurrentLine = null;
+    terminalCurrentSpan = null;
 
     output.scrollTop =
       output.scrollHeight;
+
+    return;
   }
+
+
+  // -----------------------------
+  // CARRIAGE RETURN
+  // -----------------------------
+
+  if (character === '\r') {
+    const line =
+      getCurrentTerminalLine();
+
+    line.innerHTML = '';
+
+    terminalCurrentSpan = null;
+
+    output.scrollTop =
+      output.scrollHeight;
+
+    return;
+  }
+
+
+  // -----------------------------
+  // NORMAL CHARACTER
+  // -----------------------------
+
+  const span =
+    getCurrentTerminalSpan();
+
+  span.textContent += character;
+
+  output.scrollTop =
+    output.scrollHeight;
+}
+
+
+// --------------------------------------------------
+// ANSI COLOR HANDLER
+//
+// Handles Python codes like:
+//
+// \033[31m = red
+// \033[32m = green
+// \033[33m = yellow
+// \033[34m = blue
+// \033[0m  = reset
+// --------------------------------------------------
+
+function applyAnsiCode(sequence) {
+
+  // Sequence looks like:
+  // [31m
+  // [0m
+  // [1;31m
+
+  const match =
+    sequence.match(
+      /^\[([0-9;]*)m$/
+    );
+
+  if (!match) {
+    return;
+  }
+
+  const codes =
+    match[1] === ''
+      ? [0]
+      : match[1]
+          .split(';')
+          .map(Number);
+
+
+  for (const code of codes) {
+
+    switch (code) {
+
+      // RESET
+      case 0:
+        currentAnsiClass = '';
+        break;
+
+
+      // NORMAL COLORS
+
+      case 30:
+        currentAnsiClass =
+          'ansi-black';
+        break;
+
+      case 31:
+        currentAnsiClass =
+          'ansi-red';
+        break;
+
+      case 32:
+        currentAnsiClass =
+          'ansi-green';
+        break;
+
+      case 33:
+        currentAnsiClass =
+          'ansi-yellow';
+        break;
+
+      case 34:
+        currentAnsiClass =
+          'ansi-blue';
+        break;
+
+      case 35:
+        currentAnsiClass =
+          'ansi-magenta';
+        break;
+
+      case 36:
+        currentAnsiClass =
+          'ansi-cyan';
+        break;
+
+      case 37:
+        currentAnsiClass =
+          'ansi-white';
+        break;
+
+
+      // BRIGHT COLORS
+
+      case 90:
+        currentAnsiClass =
+          'ansi-bright-black';
+        break;
+
+      case 91:
+        currentAnsiClass =
+          'ansi-bright-red';
+        break;
+
+      case 92:
+        currentAnsiClass =
+          'ansi-bright-green';
+        break;
+
+      case 93:
+        currentAnsiClass =
+          'ansi-bright-yellow';
+        break;
+
+      case 94:
+        currentAnsiClass =
+          'ansi-bright-blue';
+        break;
+
+      case 95:
+        currentAnsiClass =
+          'ansi-bright-magenta';
+        break;
+
+      case 96:
+        currentAnsiClass =
+          'ansi-bright-cyan';
+        break;
+
+      case 97:
+        currentAnsiClass =
+          'ansi-bright-white';
+        break;
+    }
+  }
+
+  // Force a fresh span after a color change
+  terminalCurrentSpan = null;
 }
