@@ -123,18 +123,14 @@ self.onmessage = async event => {
     // SEND PRINT() OUTPUT TO THE WEBSITE
     // --------------------------------------------------------
 
-    pyodide.setStdout({
-
-      batched: text => {
-
-        self.postMessage({
-          type: 'stdout',
-          text: `${text}\n`
-        });
-
-      }
-
+pyodide.setStdout({
+  raw: byte => {
+    self.postMessage({
+      type: 'stdout-byte',
+      byte: byte
     });
+  }
+});
 
 
     // --------------------------------------------------------
