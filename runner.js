@@ -60,7 +60,7 @@ async function startGame() {
   control = new Int32Array(sharedBuffer, 0, 2);
   textBuffer = new Uint16Array(sharedBuffer, 8);
 
-  worker = new Worker('python-worker.js');
+  worker = new Worker('python-worker.js', { type: 'module' });
   worker.onmessage = handleWorkerMessage;
   worker.onerror = (event) => {
     writeLine(`WORKER ERROR: ${event.message}`, 'error');
