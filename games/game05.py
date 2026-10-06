@@ -28,10 +28,8 @@ typewriter("")
 typewriter("The kingdom is in danger!")
 typewriter("Three monsters have taken over.")
 typewriter("")
-<<<<<<< HEAD
 typewriter("You must defeat them and save")
 typewriter("the kingdom.")
-=======
 typewriter("Only one hero can stop them.")
 typewriter("That hero is YOU.")
 typewriter("")
