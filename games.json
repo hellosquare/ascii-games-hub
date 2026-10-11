@@ -23,5 +23,5 @@
   {"id":22,"title":"Cooking Battle","file":"games/game22.py"},
   {"id":23,"title":"Tower of Doom","file":"games/game23.py"},
   {"id":24,"title":"Game 24","file":"games/game24.py"},
-  {"id": 25, "title": "Let's Go Explorer", "file": "games/game25.py"},
+  {"id": 25, "title": "Let's Go Explorer", "file": "games/game25.py"}
 ]
