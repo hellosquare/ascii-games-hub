@@ -1,5 +1,4 @@
-#you still need to add your art and double check your error checking
-
+#final
 #TEST
 import sys
 import time
