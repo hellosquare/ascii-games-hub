@@ -1,6 +1,4 @@
-#Second Checkpoint Teacher Check - Ms. Christine 
-#thanks for reorganizing the code and having the constants, and variables, and libraries right at the top for easy visuals. Also appreciate how you've added the ASCII art already
-
+#final
 import time
 
 # Player Variables
