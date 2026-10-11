@@ -1,4 +1,4 @@
-#variables
+#final
 HP = 0
 atk = 0
 
