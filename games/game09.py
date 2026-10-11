@@ -1,6 +1,4 @@
-#Third Checkpoint - Ms. Christine - check the comments
-#your if statements are a bit confusing - let's edit some of them for clarity - it should be if == (option 1) or (option 2) rather than if in (option 1 , option 2) for readability
-#remember to add your art
+#final
 
 #------imports------#
 import time
@@ -49,10 +47,54 @@ def start_game():
     while True:
         if characterchoice == "1":
             superpower = "Wizard"
+            print(r'''
+                             /\
+                            /  \
+                           |    |
+                         --:':--
+                           :'_' :
+                           _:"":\___
+            ' '      ____.' :::     '._
+           . *=====<<=)           \    :
+            .  '      '-'-'\_      /'._.'
+                             \====:_ ""
+                            .'     \\
+                           :       :
+                          /   :    \
+                         :   .      '.
+         ,. _        snd :  : :      :
+      '-'    ).          :__:-:__.;--'
+    (        '  )        '-'   '-'
+ ( -   .00.   - _
+(    .'  _ )     )
+'-  ()_.\,\,   -
+
+            ''')
             typewriter("You picked a wizard!")
             break
         elif characterchoice == "2":
             superpower = "Super power"
+<<<<<<< HEAD
+            print(r'''
+     /\
+    // \
+    || |
+    || |
+    || |
+    || |
+    || |
+    || |
+ __ || | __
+/___||_|___\
+     ww
+     MM
+    _MM_
+   (&<>&)
+    ~~~~
+
+            ''')
+=======
+>>>>>>> 7e4152ad2211dee4438bc701759e1363c610bb54
             typewriter("You picked a hero with a power!")
             break
         else:
