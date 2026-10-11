@@ -1,9 +1,4 @@
-#Third Checkpoint - Ms. Christine
-#lets add some places where you can track the players quality and coins - these need to be printed out during the game
-#you are missing the choices for fruit cake
-#add ASCII art
-#add error checking for invalid answers
-
+#final
 #IMPORT
 import time
 import sys
@@ -61,7 +56,8 @@ if dessert_choice =="1":
         if add_chips == "yes":
             dessert_quality *= 1.5
             has_special_topping = True
-            print("Chocolate chips added!(Quality *1.5)") #you need to make this more readable for the user
+            print("Chocolate chips added!(Quality *1.5)")
+            print(f"Coins left: {coins}, Quality: {dessert_quality}")
     
     elif flavor_choice == "2":
         dessert = "Strawberry Cake"
@@ -72,12 +68,13 @@ if dessert_choice =="1":
             dessert_quality +=10.0
             has_special_topping = True
             print("Strawberry jam added!(Quality +10)")
-            
+            print(f"Coins left: {coins}, Quality: {dessert_quality}")
         elif strawberry_choice =="fresh":
             dessert_quality += 15.0
             has_special_topping = True
             print("Fresh strawberries added!(Quality +15)")
-            
+            print(f"Coins left: {coins}, Quality: {dessert_quality}")
+
         else:
             print("No strawberries added.")
     
@@ -90,8 +87,36 @@ if dessert_choice =="1":
             dessert_quality += 12.0
             has_special_topping = True
             print("Blueberry topping added!(Quality +12)")
+            print(f"Coins left: {coins}, Quality: {dessert_quality}")
 
-    else:
+    elif flavor_choice == "4":
+        dessert = "Fruit Cake"
+        print("Delicious Fruit Cake!")
+        fruit_choice = input("Do you want mango,blueberry,strawberry,or mixed fruit?(type 'mango','blueberry','strawberry',or 'mixed')").lower()
+        if fruit_choice == "mango":
+            dessert_quality += 10.0
+            has_special_topping = True
+            print("Mango added!(Quality +10)")
+            print(f"Coins left: {coins}, Quality: {dessert_quality}")
+        elif fruit_choice == "blueberry":
+            dessert_quality += 12.0
+            has_special_topping = True
+            print("Blueberry added!(Quality +12)")
+            print(f"Coins left: {coins}, Quality: {dessert_quality}")
+        elif fruit_choice == "strawberry":
+            dessert_quality += 15.0
+            has_special_topping = True
+            print("Strawberry added!(Quality +15)")
+            print(f"Coins left: {coins}, Quality: {dessert_quality}")
+        elif fruit_choice == "mixed":
+            dessert_quality += 20.0
+            has_special_topping = True
+            print("Mixed fruit added!(Quality +20)")
+            print(f"Coins left: {coins}, Quality: {dessert_quality}")
+        else:
+            print("Invalid fruit choice.")
+
+    else: 
         print("Invalid choice. No special flavor selected.") #make the user try again (also you dont have choices for fruit cake yet)
 
     print("\nLet's buy ingredients for the cake! You have 100 coins to spend.")
@@ -102,13 +127,54 @@ if dessert_choice =="1":
     if buy_choice == "1":
         coins -= 50
         dessert_quality += 20.0
-        print("Good quality ingredients bought! Coins left:{coins}, Quality:{dessert_quality}") #fix this formatting please
+        print(f"Good quality ingredients bought! Coins left: {coins}, Quality: {dessert_quality}") #fix this formatting please
         
     elif buy_choice == "2":
         coins -= 20
         dessert_quality += 5.0
-        print("Cheap ingredients bought! Coins left:{coins},Quality:{dessert_quality}")
+        print(f"Cheap ingredients bought! Coins left: {coins}, Quality: {dessert_quality}")
 
+# Mix Batter
+print("Mixing the cake batter!")
+try:
+    speed = int(input("How fast do you want to mix the batter? (1-10):"))
+    except ValueError:
+        print("Invalid input! Please enter a number between 1 and 10.")
+        speed = int(input("How fast do you want to mix the batter? (1-10):"))
+   
+    else:
+        if speed < 5:
+            dessert_quality *= 0.9
+            print("You mixed too slowly! (Quality *0.9)")
+        elif speed > 8:
+            dessert_quality *= 0.8
+            print("You mixed too fast! (Quality *0.8)")
+        else:
+            dessert_quality *= 1.1
+            print("Perfect mixing speed! (Quality *1.1)")
+
+# Bake Cake
+print("Put the cake in the oven!")
+try:
+    temp = int(input("Set oven temperature (200-500) degrees Fahrenheit):"))
+    bake_time = int(input("Set bake time (10-60 minutes):"))
+except ValueError:
+    print("Invalid input! Please enter valid numbers for temperature and bake time.")
+    temp = int(input("Set oven temperature (200-500) degrees Fahrenheit:"))
+    bake_time = int(input("Set bake time (10-60 minutes):"))
+
+if temp > 400:
+    if bake_time > 40:
+        print("Oh no! Too hot and too long! The cake is burnt!")
+        dessert_quality -= 40.0
+        print(f"Quality: {dessert_quality}")
+elif temp < 250:
+    print("Too cold! It did not rise. It is flat")
+    dessert_quality -= 20.0
+else:
+    if bake_time >= 25 and bake_time <=35:
+        print("Perfect! It smells so good!(Quality +20)")
+        dessert_quality += 20.0
 
 elif dessert_choice == "2":
     dessert = "Cookies"
@@ -140,3 +206,56 @@ elif dessert_choice == "2":
                 dessert_quality == 10.0
                 has_special_topping =True
                 print("Raisins added! (Quality +10)")
+
+        else:
+            dessert = "Sugar Cookies"
+            print("Sweet Sugar Cookies")
+            add_frosting = input("Do you want to add frosting? (yes/no):").lower()
+            if add_frosting == "yes":
+                dessert_quality += 15.0
+                has_special_topping = True
+                print("Frosting added! (Quality +15)")
+
+    # Choose Cookie Shape
+    print("What shape do you want your cookies to be?")
+    print("1. Round")
+    print("2. Square")
+    print("3. Heart")
+    shape_choice = input("Enter 1, 2, or 3: ")
+
+    if shape_choice == "1":
+        dessert_quality += 5.0
+        print("Round cookies! (Quality +5)")
+    elif shape_choice == "2":
+        dessert_quality += 3.0
+        print("Square cookies! (Quality +3)")
+    elif shape_choice == "3":
+        dessert_quality += 7.0
+        print("Heart-shaped cookies! (Quality +7)")
+
+# Bake Cookies
+print("Put the cookies in the oven!")
+try:
+    temp = int(input("Set oven temperature (200-500) degrees Fahrenheit):"))
+    bake_time = int(input("Set bake time (10-60 minutes):"))
+except ValueError:
+    print("Invalid input! Please enter valid numbers for temperature and bake time.")
+    temp = int(input("Set oven temperature (200-500) degrees Fahrenheit:"))
+    bake_time = int(input("Set bake time (10-60 minutes):"))
+
+if temp > 400:
+    if bake_time > 40:
+        print("Oh no! Too hot and too long! The cake is burnt!")
+        dessert_quality -= 40.0
+        print(f"Quality: {dessert_quality}")
+elif temp < 250:
+    print("Too cold! It did not rise. It is flat")
+    dessert_quality -= 20.0
+else:
+    if bake_time >= 25 and bake_time <=35:
+        print("Perfect! It smells so good!(Quality +20)")
+        dessert_quality += 20.0
+
+print(f"Chef {player_name}, you have finished making the {dessert}!")
+print(f"You put the {dessert} in the display and it is ready to be served!")
+
