@@ -1,48 +1,277 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#050807" />
-  <title>ASCII Games Hub</title>
-  <link rel="stylesheet" href="styles.css" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  />
+
+  <meta
+    name="theme-color"
+    content="#050807"
+  />
+
+  <title>ASCII Text-Based Games | Computer Science 10</title>
+
+  <!-- Keep the original shared styling -->
+  <link
+    rel="stylesheet"
+    href="styles.css"
+  />
+
+  <!-- Homepage-only styling -->
+  <link
+    rel="stylesheet"
+    href="hub.css"
+  />
 </head>
+
 <body class="hub-page">
-  <main class="site-shell">
-    <header class="topbar">
-      <span>[ ASCII GAMES HUB ]</span>
-      <span>[ SMALL GAMES. BIG IMAGINATION. ]</span>
+
+  <main class="site-shell hub-shell">
+
+    <!-- ======================================================
+         TOP COURSE LABELS
+         ====================================================== -->
+
+    <header class="hub-topbar">
+
+      <span>
+        [ COMPUTER SCIENCE 10 - CSE1010 AND CSE1110 PROJECT ]
+      </span>
+
+      <span>
+        [ TEXT-BASED GAMES WITH BIG IMAGINATION ]
+      </span>
+
     </header>
 
-    <section class="hero" aria-labelledby="page-title">
-      <pre class="hero-art" aria-hidden="true">      *       .          *                    .
-   .       _..._                   *
-         .:::::::.            .          *
-        :::::::::::
-        ':::::::::'        *        .
-          `':::'`</pre>
-      <h1 id="page-title" class="ascii-title">ASCII GAMES</h1>
-      <p class="tagline">PLAY &nbsp;◆&nbsp; LEARN &nbsp;◆&nbsp; CREATE &nbsp;◆&nbsp; ENJOY</p>
+
+    <!-- ======================================================
+         DECORATIVE ASCII BACKGROUND
+         ====================================================== -->
+
+    <div
+      class="ascii-background"
+      aria-hidden="true"
+    >
+
+      <!-- Adventure / exploration -->
+      <pre class="ascii-decoration decor-adventure">
+             /\
+            /  \
+           / /\ \
+          / /  \ \
+         /_/____\_\
+            /\
+           /  \
+        ___|  |___
+           |  |
+           |__|
+      </pre>
+
+
+      <!-- Space -->
+      <pre class="ascii-decoration decor-space">
+            .
+       .        *
+             .       .
+          ___
+        .'   '.
+       /  .-.  \
+      |  /   \  |
+       \ '---' /
+        '.___.'
+           *
+      </pre>
+
+
+      <!-- Cat -->
+      <pre class="ascii-decoration decor-cat">
+        /\_/\
+       ( o.o )
+        > ^ <
+      </pre>
+
+
+      <!-- Cooking -->
+      <pre class="ascii-decoration decor-cooking">
+          ( (
+           ) )
+        ........
+        |      |]
+        \      /
+         `----'
+           ||
+        ___||___
+      </pre>
+
+
+      <!-- Castle / knight -->
+      <pre class="ascii-decoration decor-castle">
+        |>>>                    |>>>
+        |                       |
+    _  _|_  _              _  _|_  _
+   | |_| |_| |            | |_| |_| |
+   |         |            |         |
+   |   _     |            |     _   |
+   |  | |    |____________|    | |  |
+   |__|_|______________________|_|__|
+            /|\
+           /_|_\
+            | |
+           /   \
+      </pre>
+
+
+      <!-- Mystery -->
+      <pre class="ascii-decoration decor-mystery">
+          _____
+        .'     '.
+       /    ?    \
+      |     ?     |
+       \    .    /
+        '.___.'
+           \
+            \__
+               O
+      </pre>
+
+
+      <!-- Car -->
+      <pre class="ascii-decoration decor-car">
+          ______
+      ___/|_||_\`.__
+     (   _    _ _  \
+     =`-(_)--(_)-'
+      </pre>
+
+    </div>
+
+
+    <!-- ======================================================
+         HERO
+         ====================================================== -->
+
+    <section
+      class="hub-hero"
+      aria-labelledby="page-title"
+    >
+
+      <p class="hero-command">
+        &gt; INITIALIZING STUDENT PROJECT ARCHIVE...
+      </p>
+
+      <h1
+        id="page-title"
+        class="ascii-title hub-title"
+      >
+        ASCII TEXT-BASED GAMES
+      </h1>
+
+      <p class="project-process">
+        <span>IMAGINE</span>
+        <span class="process-arrow">→</span>
+
+        <span>PLAN</span>
+        <span class="process-arrow">→</span>
+
+        <span>CODE</span>
+        <span class="process-arrow">→</span>
+
+        <span>CREATE</span>
+        <span class="process-arrow">→</span>
+
+        <span>PLAY</span>
+      </p>
+
     </section>
 
-    <section class="intro-panel">
-      <h2>Welcome to the ASCII Games Hub!</h2>
-      <p>A collection of 24 student-made games, built with Python and a lot of creativity.</p>
-      <p>Explore, play, and see what’s possible with just text.</p>
+
+    <!-- ======================================================
+         INTRODUCTION
+         ====================================================== -->
+
+    <section class="intro-panel hub-intro">
+
+      <p class="intro-label">
+        [ WELCOME TO OUR FIRST COMPUTER SCIENCE 10 PROJECT ]
+      </p>
+
+      <h2>
+        Welcome to the ASCII Games Hub!
+      </h2>
+
+      <p>
+        For their first project in Computer Science 10,
+        students used their early Python programming skills,
+        problem-solving, and creativity to design original
+        text-based games for young users to explore and enjoy.
+      </p>
+
+      <p>
+        Each game began as an idea, developed through planning
+        and coding, and became an interactive experience built
+        almost entirely with text.
+      </p>
+
+      <p class="intro-highlight">
+        Explore the collection and see what is possible when
+        coding meets imagination.
+      </p>
+
     </section>
 
-    <div class="section-rule"><span>[ SELECT A GAME ]</span></div>
 
-    <section id="game-grid" class="game-grid" aria-label="Games"></section>
+    <!-- ======================================================
+         GAME SELECTION
+         ====================================================== -->
 
-    <footer class="site-footer">
-      <pre aria-hidden="true">   /\_/\\
-  ( o.o )     GOOD GAMES AHEAD ---&gt;
-   &gt; ^ &lt;</pre>
-      <p>“Games are proof that imagination has no limits.”</p>
+    <div class="section-rule hub-section-rule">
+
+      <span>
+        [ SELECT ONE OF OUR STUDENTS' GAMES! ]
+      </span>
+
+    </div>
+
+
+    <section
+      id="game-grid"
+      class="game-grid hub-game-grid"
+      aria-label="Student games"
+    >
+    </section>
+
+
+    <!-- ======================================================
+         SMALL BOTTOM ASCII DETAIL
+         ====================================================== -->
+
+    <footer class="hub-footer">
+
+      <pre aria-hidden="true">
+      .--.
+     |o_o |
+     |:_/ |
+    //   \ \
+   (|     | )
+  /'\_   _/`\
+  \___)=(___/
+
+  &gt; READY TO PLAY_
+      </pre>
+
     </footer>
+
   </main>
 
+
   <script src="app.js"></script>
+
 </body>
+
 </html>
