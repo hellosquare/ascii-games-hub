@@ -1,0 +1,678 @@
+/* ==========================================================
+   COMPUTER SCIENCE 10
+   ASCII TEXT-BASED GAMES HUB
+   Homepage-only styling
+   ========================================================== */
+
+
+/* ----------------------------------------------------------
+   PAGE
+   ---------------------------------------------------------- */
+
+.hub-page {
+  overflow-x: hidden;
+}
+
+.hub-shell {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  padding-bottom: 28px;
+}
+
+
+/* ----------------------------------------------------------
+   TOP BAR
+   ---------------------------------------------------------- */
+
+.hub-topbar {
+  position: relative;
+  z-index: 5;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  gap: 28px;
+
+  color: var(--green);
+
+  font-size: clamp(
+    10px,
+    1vw,
+    14px
+  );
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+}
+
+.hub-topbar span:last-child {
+  color: #c4cbc6;
+  text-align: right;
+}
+
+
+/* ----------------------------------------------------------
+   BACKGROUND ASCII ART
+   ---------------------------------------------------------- */
+
+.ascii-background {
+  position: absolute;
+
+  inset: 42px 0 0;
+
+  z-index: -1;
+
+  pointer-events: none;
+
+  overflow: hidden;
+}
+
+.ascii-decoration {
+  position: absolute;
+
+  margin: 0;
+
+  color: rgba(
+    178,
+    203,
+    184,
+    0.17
+  );
+
+  font-family:
+    "SFMono-Regular",
+    Consolas,
+    "Liberation Mono",
+    Menlo,
+    monospace;
+
+  line-height: 1.05;
+
+  white-space: pre;
+
+  user-select: none;
+}
+
+
+/* Adventure */
+
+.decor-adventure {
+  top: 130px;
+  left: -15px;
+
+  font-size: 13px;
+
+  transform:
+    rotate(-4deg)
+    scale(0.9);
+}
+
+
+/* Space */
+
+.decor-space {
+  top: 48px;
+  right: 4%;
+
+  font-size: 12px;
+
+  transform: rotate(7deg);
+}
+
+
+/* Cat */
+
+.decor-cat {
+  top: 460px;
+  left: 4%;
+
+  font-size: 18px;
+}
+
+
+/* Cooking */
+
+.decor-cooking {
+  top: 620px;
+  right: 3%;
+
+  font-size: 14px;
+
+  transform: rotate(3deg);
+}
+
+
+/* Castle */
+
+.decor-castle {
+  top: 820px;
+  left: -15px;
+
+  font-size: 10px;
+
+  opacity: 0.8;
+}
+
+
+/* Mystery */
+
+.decor-mystery {
+  top: 390px;
+  right: 12%;
+
+  font-size: 14px;
+}
+
+
+/* Car */
+
+.decor-car {
+  top: 850px;
+  right: 7%;
+
+  font-size: 12px;
+}
+
+
+/* ----------------------------------------------------------
+   HERO
+   ---------------------------------------------------------- */
+
+.hub-hero {
+  position: relative;
+
+  z-index: 2;
+
+  text-align: center;
+
+  padding:
+    54px
+    24px
+    34px;
+}
+
+.hero-command {
+  margin:
+    0
+    0
+    18px;
+
+  color: rgba(
+    98,
+    245,
+    139,
+    0.72
+  );
+
+  font-size: 11px;
+
+  letter-spacing: 0.1em;
+}
+
+.hub-title {
+  max-width: 1200px;
+
+  margin:
+    10px
+    auto
+    20px;
+
+  font-size: clamp(
+    44px,
+    7vw,
+    100px
+  );
+
+  line-height: 0.95;
+
+  letter-spacing: 0.055em;
+
+  text-wrap: balance;
+}
+
+
+/* ----------------------------------------------------------
+   DESIGN PROCESS
+   ---------------------------------------------------------- */
+
+.project-process {
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap:
+    10px
+    16px;
+
+  margin:
+    26px
+    auto
+    0;
+
+  color: #e0e5e1;
+
+  font-size: clamp(
+    11px,
+    1.35vw,
+    16px
+  );
+
+  letter-spacing: 0.17em;
+
+  font-weight: 600;
+}
+
+.project-process span:not(.process-arrow) {
+  color: #edf2ee;
+}
+
+.process-arrow {
+  color: var(--green);
+
+  text-shadow:
+    0 0 10px
+    rgba(
+      98,
+      245,
+      139,
+      0.4
+    );
+}
+
+
+/* ----------------------------------------------------------
+   INTRO PANEL
+   ---------------------------------------------------------- */
+
+.hub-intro {
+  position: relative;
+
+  z-index: 2;
+
+  width: min(
+    930px,
+    calc(100% - 40px)
+  );
+
+  margin:
+    8px
+    auto
+    58px;
+
+  padding:
+    30px
+    40px;
+
+  border:
+    1px dashed
+    rgba(
+      145,
+      158,
+      149,
+      0.8
+    );
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(
+        10,
+        18,
+        12,
+        0.9
+      ),
+      rgba(
+        5,
+        10,
+        7,
+        0.74
+      )
+    );
+
+  box-shadow:
+    inset 0 0 35px
+    rgba(
+      98,
+      245,
+      139,
+      0.015
+    );
+}
+
+.intro-label {
+  margin-bottom: 13px !important;
+
+  color: #9aa39c !important;
+
+  font-size: 10px;
+
+  letter-spacing: 0.12em;
+}
+
+.hub-intro h2 {
+  margin-bottom: 18px;
+
+  font-size: clamp(
+    17px,
+    1.7vw,
+    21px
+  );
+}
+
+.hub-intro p {
+  max-width: 770px;
+
+  margin:
+    8px
+    auto;
+
+  color: #d6dcd7;
+
+  font-size: 14px;
+
+  line-height: 1.75;
+}
+
+.hub-intro .intro-highlight {
+  margin-top: 18px;
+
+  color: var(--green);
+
+  font-weight: 600;
+}
+
+
+/* ----------------------------------------------------------
+   SECTION DIVIDER
+   ---------------------------------------------------------- */
+
+.hub-section-rule {
+  position: relative;
+
+  z-index: 2;
+
+  margin-bottom: 32px;
+}
+
+.hub-section-rule span {
+  padding:
+    0
+    8px;
+
+  white-space: nowrap;
+
+  font-weight: 600;
+}
+
+
+/* ----------------------------------------------------------
+   GAME GRID
+   ---------------------------------------------------------- */
+
+.hub-game-grid {
+  position: relative;
+
+  z-index: 2;
+
+  gap:
+    14px
+    16px;
+}
+
+.hub-game-grid .game-card {
+  position: relative;
+
+  min-height: 78px;
+
+  padding:
+    14px
+    16px;
+
+  overflow: hidden;
+
+  border:
+    1px dashed
+    rgba(
+      126,
+      142,
+      130,
+      0.72
+    );
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(
+        10,
+        17,
+        12,
+        0.72
+      ),
+      rgba(
+        5,
+        9,
+        7,
+        0.64
+      )
+    );
+
+  letter-spacing: 0.02em;
+}
+
+
+/* Small terminal line inside card */
+
+.hub-game-grid .game-card::after {
+  content: "_";
+
+  position: absolute;
+
+  right: 10px;
+  bottom: 7px;
+
+  color: rgba(
+    98,
+    245,
+    139,
+    0
+  );
+
+  transition:
+    color
+    0.15s ease;
+}
+
+.hub-game-grid .game-card:hover::after,
+.hub-game-grid .game-card:focus-visible::after {
+  color: var(--green);
+}
+
+
+/* Brighter hover */
+
+.hub-game-grid .game-card:hover,
+.hub-game-grid .game-card:focus-visible {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(
+        20,
+        46,
+        27,
+        0.72
+      ),
+      rgba(
+        7,
+        18,
+        10,
+        0.8
+      )
+    );
+
+  box-shadow:
+    0
+    0
+    26px
+    rgba(
+      98,
+      245,
+      139,
+      0.07
+    ),
+    inset
+    0
+    0
+    18px
+    rgba(
+      98,
+      245,
+      139,
+      0.035
+    );
+}
+
+
+/* ----------------------------------------------------------
+   FOOTER
+   ---------------------------------------------------------- */
+
+.hub-footer {
+  position: relative;
+
+  z-index: 2;
+
+  display: flex;
+
+  justify-content: center;
+
+  margin-top: 62px;
+
+  padding:
+    16px
+    0
+    6px;
+
+  border-bottom:
+    1px dashed
+    rgba(
+      110,
+      119,
+      112,
+      0.8
+    );
+}
+
+.hub-footer pre {
+  margin: 0;
+
+  color: #9da69f;
+
+  font-size: 10px;
+
+  line-height: 1.2;
+
+  text-align: center;
+}
+
+
+/* ----------------------------------------------------------
+   RESPONSIVE
+   ---------------------------------------------------------- */
+
+@media (max-width: 900px) {
+
+  .hub-topbar {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 8px;
+  }
+
+  .hub-topbar span:last-child {
+    text-align: left;
+  }
+
+  .hub-hero {
+    padding-top: 42px;
+  }
+
+  .decor-castle,
+  .decor-cooking,
+  .decor-mystery {
+    opacity: 0.4;
+  }
+
+}
+
+
+@media (max-width: 720px) {
+
+  .hub-title {
+    font-size: clamp(
+      38px,
+      12vw,
+      64px
+    );
+
+    letter-spacing: 0.025em;
+  }
+
+  .project-process {
+    gap:
+      8px
+      10px;
+
+    letter-spacing: 0.08em;
+  }
+
+  .hub-intro {
+    padding:
+      24px
+      22px;
+  }
+
+  .hub-section-rule span {
+    white-space: normal;
+
+    font-size: 11px;
+  }
+
+  .ascii-decoration {
+    opacity: 0.5;
+  }
+
+  .decor-adventure,
+  .decor-space {
+    display: none;
+  }
+
+}
+
+
+@media (max-width: 480px) {
+
+  .hero-command {
+    font-size: 9px;
+  }
+
+  .project-process {
+    font-size: 10px;
+  }
+
+  .process-arrow {
+    font-size: 9px;
+  }
+
+  .hub-footer {
+    margin-top: 38px;
+  }
+
+}
