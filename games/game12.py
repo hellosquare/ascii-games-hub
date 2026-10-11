@@ -1,8 +1,4 @@
-#Third and Final Checkpoint - Ms. Christine
-#please make sure you check that player stats are being printed out at every decision - like when the player is losing or adding HP, make sure you print those values out as well. 
-#this is in line 148, 165, 170ish... and onwards
-#also double check your operators whether they should be plus or minus
-
+#final
 import random as r
 
 print("")
