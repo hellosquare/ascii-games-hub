@@ -17,10 +17,10 @@
   {"id":16,"title":"Game 16","file":"games/game16.py"},
   {"id":17,"title":"Game 17","file":"games/game17.py"},
   {"id":18,"title":"Game 18","file":"games/game18.py"},
-  {"id":19,"title":"Game 19","file":"games/game19.py"},
-  {"id":20,"title":"Game 20","file":"games/game20.py"},
-  {"id":21,"title":"Game 21","file":"games/game21.py"},
-  {"id":22,"title":"Game 22","file":"games/game22.py"},
+  {"id":19,"title":"Cat Adventure","file":"games/game19.py"},
+  {"id":20,"title":"Fighting Gane","file":"games/game20.py"},
+  {"id":21,"title":"Finding Keys","file":"games/game21.py"},
+  {"id":22,"title":"Cooking Battle","file":"games/game22.py"},
   {"id":23,"title":"Game 23","file":"games/game23.py"},
   {"id":24,"title":"Game 24","file":"games/game24.py"}
 ]
