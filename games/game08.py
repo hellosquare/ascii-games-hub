@@ -1,6 +1,6 @@
+#final
 #variables
 coins = 0
-
 
 print("Welcome to the game")
 print()
@@ -16,30 +16,56 @@ print("Let's begin!")
 
 
 print("You are a sailor, you are deciding to go on a trade ship or a pirate ship, which one do you choose?")
-#enter a picture of a ship here
+print(r"""    __|__ |___| |\
+    |o__| |___| | \
+    |___| |___| |o \
+   _|___| |___| |__o\
+  /...\_____|___|____\_/
+  \   o * o * * o o  /
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+ """)
 print("if you choose trade ship, you earn 50 coins")
 print("if you choose pirate ship, you earn 10 coins")
-choiceOne = input("type your choice in complete words: 1. trade ship 2. pirate ship")
+choiceOne = input("type your choice in complete words: 1. trade ship 2. pirate ship: ")
 
-if choiceOne == "trade ship":
+if choiceOne == "1":
     print("you are on a trade ship")
     coins = coins + 50
     print("coins:" + str(coins)) 
     
     print("you are given the choice to go trade in a close place or a far away place, which one do you choose?")
-    #enter a picture of water waves/ocean waves here
+    print(r"""          |
+        \ _ /
+      -= (_) =-
+        /   \         _\/_
+          |           //o\  _\/_
+   _____ _ __ __ ____ _ | __/o\\ _
+ =-=-_-__=_-= _=_=-=_,-'|"'""-|-,_
+  =- _=-=- -_=-=_,-"          |
+=- =- -=.--"
+    
+    """)
     print("if you choose to trade in close places, you earn 30 coins")
     print("if you choose to trade in far places , you earn 49 coins")
     choiceTwo = input("type your choice in complete words: 1. close places 2. far away places") 
     
-    if choiceTwo == "close places":
+    if choiceTwo == "1":
         print("you have chosen to trade in close places")
         coins = coins + 30
         print("coins:" + str(coins)) 
         print()
         print()
         print("Since you chose the close place, you find a treasure chest!")
-        #enter a picture of a treasure chest
+        print(r"""
+        /\____;;___\
+       | /         /
+       `. ())oo() .
+        |\(%()*^^()^\
+       %| |-%-------|
+      % \ | %  ))   |
+      %  \|%________|   
+        
+        """)
         print("you earn an additional 20 coins!")
         coins = coins + 20 
         print("coins:" + str(coins)) 
@@ -47,36 +73,76 @@ if choiceOne == "trade ship":
         print()
         print("YOU WIN!")
     
-    elif choiceTwo == "far away places":
+    elif choiceTwo == "2":
         print ("you have chosen to trade in far away places, you earn 49 coins")
         coins = coins + 49
         print("coins:" + str(coins)) 
         print("Since you chose the far away place, your ship got attacked by pirates!")
-        #enter a picture of a pirate flag
+        print("""                       |    |    |                 
+             )_)  )_)  )_)              
+            )___))___))___)\            
+           )____)____)_____)\\
+         _____|____|____|____\\\__
+         \-----------------/
+ 
+       """)
         print("you died, you lost all your coins")
         coins = coins - coins
         print("coins:" + str(coins)) 
         print("YOU LOST!")
         print("restart the game")
 
-elif choiceOne == "pirate ship":
+elif choiceOne == "2":
+    print("""              ~.
+           Ya...___|__..aab     .   .
+            Y88a  Y88o  Y88a   (     )
+             Y88b  Y88b  Y88b   `.oo'
+             :888  :888  :888  ( (`-'
+    .---.    d88P  d88P  d88P   `.`.
+   / .-._)  d8P'"""|"""'-Y8P      `.`.
+  ( (`._) .-.  .-. |.-.  .-.  .-.   ) )
+   \ `---( O )( O )( O )( O )( O )-' /
+    `.    `-'  `-'  `-'  `-'  `-'  .' CJ
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+          
+          
+""")
+    
+    
     print ("you have chosen the pirate ship, you earn 10 coins")
     coins = coins + 10
     print("coins:" + str(coins))
     
-    choiceThree = input("You have to choose from two options, you can either 1. attack a trade ship or 2. attack a navy ship, which one do you choose?")
-    if choiceThree == "attack trade ship":
-        print("you have chosen to attack a trade ship, you earn 30 coins.")
-        coins = coins + 30
-        print("coins:" + str(coins))
+choiceThree = input("You have to choose from two options, you can either 1. attack a trade ship or 2. attack a navy ship, which one do you choose?")
+if choiceThree == "attack trade ship":
+    print("you have chosen to attack a trade ship, you earn 30 coins.")
+    coins = coins + 30
+    print("coins:" + str(coins))
     
-    elif choiceThree == "attack navy ship":
-        print("you have chosen to attack a navy ship, but it did not work.")
-        print("you got killed by the navy, you lost all your coins")
-        coins = coins - coins
-        print("coins:" + str(coins))
-        print("YOU LOST!")
-        print("restart the game")
+elif choiceThree == "attack navy ship":
+    print("you have chosen to attack a navy ship, but it did not work.")
+    print("""               |__
+                                |\/
+                                 ---
+                                 / | [
+                            !      | |||
+                         _/|     _/|-++'
+                        +  +--|    |--|--|_ |-
+                     { /|__|  |/\__|  |--- |||__/
+                    +---------------___[}-_===_.'____               /\
+                ____`-' ||___-{]_| _[}-  |     |_[___\==--          \/   _
+ __..._____--==/___]_|__|_____________________________[___\==--___,-----' .7
+|                                                                   BB-61/
+ \_______________________________________________________________________|
+              
+    """)
+        
+        
+    print("you got killed by the navy, you lost all your coins")
+    coins = coins - coins
+    print("coins:" + str(coins))
+    print("YOU LOST!")
+    print("restart the game")
 
 
 print("You have survived the attack from the trade ship, but your captain is not happy with your performance")
@@ -92,7 +158,16 @@ if choiceFour == "stay on the boat":
 elif choiceFour == "leave the ship":
     print("you have chosen to leave the ship.")
     print("you swam to the nerest island and you have found a treasure chest")
-    #insert picture of treasure chest
+    (r"""
+        /\____;;___\
+       | /         /
+       `. ())oo() .
+        |\(%()*^^()^\
+       %| |-%-------|
+      % \ | %  ))   |
+      %  \|%________|   
+        
+        """)
     print("inside the treasure chest you have found 60 coins")
     coins = coins + 60
     print("coins:" + str(coins))
