@@ -1,3 +1,4 @@
+#final
 import random, time
 print("=" * 75)
 print("                              THE TOWER OF DOOM")
