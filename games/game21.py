@@ -1,5 +1,4 @@
-#CONSTANTS
-
+#final
 #VARIABLES
 name = ""
 choice = ""
