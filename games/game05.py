@@ -1,6 +1,7 @@
-#IMPORTS----------------
+#final
 import time
 import random
+ 
  
 # ==========================================
 # TYPEWRITER
@@ -11,15 +12,23 @@ def typewriter(text, delay=0.02):
         print(letter, end="", flush=True)
         time.sleep(delay)
     print()
-
-#CONSTANTS---------------
-
-#VARIABLES--------------
-#make sure you declare your values here at the start
+ 
  
 # ==========================================
 # INTRO
 # ==========================================
+def show_title_art():
+    typewriter(r"""
+   _____ _               _              _   _
+  / ____| |             | |            | | | |
+| (___ | |__   __ _  __| | _____      | |_| | ___ _ __
+  \___ \| '_ \ / _` |/ _` |/ _ \ \ /\ / / __| |/ _ \ '__|
+  ____) | | | | (_| | (_| | (_) \ V  V /| |_| |  __/ |
+|_____/|_| |_|\__,_|\__,_|\___/ \_/\_/  \__|_|\___|_|
+    """)
+ 
+ 
+show_title_art()
  
 typewriter("================================")
 typewriter("        SHADOW HERO")
@@ -30,39 +39,6 @@ typewriter("Three monsters have taken over.")
 typewriter("")
 typewriter("You must defeat them and save")
 typewriter("the kingdom.")
-typewriter("Only one hero can stop them.")
-typewriter("That hero is YOU.")
-typewriter("")
-
-print(r"""zeeeeee-
-        z$$$$$$$
-        d$$$$$P
-       d$$$$$P
-      $$$$$$
-    .$$$$$$
-   .$$$$$$
-  4$$$$$$$$$$$$$
- z$$$$$$$$$$$$$
-"""""""3$$$$$
-       z$$$$P
-      d$$$$"
-    .$$$$$"
-   z$$$$$"
-  z$$$$P
- d$$$$$$$$$$"
- *******$$$"
-      .$$$"
-     .$$"
-    4$P"
-   z$"
-  zP
- z"
-""")
- 
-input("Press ENTER to begin your journey...")
- 
-typewriter("")
-typewriter("Before your adventure begins, you must choose who you are.")
 typewriter("")
  
 input("Press ENTER to start...")
@@ -104,11 +80,6 @@ typewriter("1. Super Strength")
 typewriter("2. Fire Magic")
 typewriter("3. Super Speed")
 typewriter("")
-typewriter("1. Super Strength  - 5 Lives") #you can make the lives as a constant
-typewriter("2. Super Speed     - 4 Lives")
-typewriter("3. Fire Magic      - 3 Lives")
-typewriter("4. Ice Blast       - 3 Lives")
-typewriter("5. Teleportation   - 3 Lives")
  
 choice = input("Choose 1, 2, or 3: ")
  
@@ -345,6 +316,30 @@ typewriter("You enter a dark cave.")
 typewriter("")
 typewriter("A huge Stone Golem appears!")
 typewriter("")
+typewriter("              _______")
+typewriter("            _/       \\_")
+typewriter("           /           \\")
+typewriter("          /   _______   \\")
+typewriter("         |   /       \\   |")
+typewriter("         |  |  O   O  |  |")
+typewriter("         |  |    ^    |  |")
+typewriter("         |   \\  \\_/  /   |")
+typewriter("          \\   \\_____/   /")
+typewriter("           \\___________/")
+typewriter("          __/         \\__")
+typewriter("         /               \\")
+typewriter("        /  /|         |\\  \\")
+typewriter("       /  / |         | \\  \\")
+typewriter("      /  /  |         |  \\  \\")
+typewriter("     /  /   |         |   \\  \\")
+typewriter("    /__/    |         |    \\__\\")
+typewriter("            |         |")
+typewriter("           / \\       / \\")
+typewriter("          /   \\     /   \\")
+typewriter("         /     \\   /     \\")
+typewriter("        /_______) (_______\\")
+typewriter("")
+typewriter("")
 typewriter("Stone Golem: Leave my cave!")
 typewriter("")
  
@@ -393,6 +388,27 @@ typewriter("Something moves behind you.")
 typewriter("")
 typewriter("A Shadow Beast appears!")
 typewriter("")
+typewriter("          /\\             /\\")
+typewriter("         /  \\           /  \\")
+typewriter("        /    \\_________/    \\")
+typewriter("       /                     \\")
+typewriter("      /    /\\         /\\     \\")
+typewriter("     /    /  \\       /  \\     \\")
+typewriter("    /    /    \\     /    \\     \\")
+typewriter("   /    /  O   \\   /   O  \\     \\")
+typewriter("  /    /   |    \\ /    |   \\     \\")
+typewriter(" /    /    |     V     |    \\     \\")
+typewriter("/    /     |           |     \\     \\")
+typewriter("|   /      |    /^\\    |      \\    |")
+typewriter("|  /       |   /   \\   |       \\   |")
+typewriter("| /        |  /     \\  |        \\  |")
+typewriter("|/         | /       \\ |         \\ |")
+typewriter("|          |/         \\|          \\|")
+typewriter("|          |           |           |")
+typewriter("|          |           |           |")
+typewriter("/|\\        /|\\         /|\\        /|\\")
+typewriter("")
+typewriter("")
 typewriter("Shadow Beast: You cannot catch me!")
 typewriter("")
  
@@ -440,6 +456,37 @@ typewriter("")
 typewriter("The doors open.")
 typewriter("")
 typewriter("The Dark Lord is waiting.")
+typewriter("")
+typewriter("                 /\\")
+typewriter("                /  \\")
+typewriter("               /    \\")
+typewriter("              /  /\\  \\")
+typewriter("             /  /  \\  \\")
+typewriter("            /  /    \\  \\")
+typewriter("           /  /      \\  \\")
+typewriter("          /  /________\\  \\")
+typewriter("         /  /          \\  \\")
+typewriter("        /  /   O    O   \\  \\")
+typewriter("       /  /     \\  /     \\  \\")
+typewriter("      /  /       \\/       \\  \\")
+typewriter("     /  /        /\\        \\  \\")
+typewriter("    /  /        /  \\        \\  \\")
+typewriter("   /  /        /    \\        \\  \\")
+typewriter("  /  /        /      \\        \\  \\")
+typewriter(" /  /        /        \\        \\  \\")
+typewriter("/__/        /          \\        \\__\\")
+typewriter("           /            \\")
+typewriter("          /              \\")
+typewriter("         /    /|    |\\    \\")
+typewriter("        /    / |    | \\    \\")
+typewriter("       /    /  |    |  \\    \\")
+typewriter("      /    /   |    |   \\    \\")
+typewriter("     /____/    |    |    \\____\\")
+typewriter("               |    |")
+typewriter("              / \\  / \\")
+typewriter("             /   \\/   \\")
+typewriter("            /___/  \\___\\")
+typewriter("")
 typewriter("")
 typewriter("Dark Lord: You made it this far.")
 typewriter("Dark Lord: But you will not defeat me!")
