@@ -1,13 +1,4 @@
-#SecondCheckpoint - look for comments below from Ms. Christine
-#Hi Kevin, please organize your code so that...
-
-#imports go under here -----
-
-#constants go under here -----
-
-#variables go under here -----
-
-
+#final
 print("Final test")
 
 import time #any imports from the library - these should go at the very top before your constants and variables
