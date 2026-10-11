@@ -1,11 +1,4 @@
-#Third Checkpoint - Ms. Christine
-
-#it would be a good idea to add your variables here like...
-#energy
-#punctual
-#reputation
-#prepared
-
+#final
 """A branching text adventure about Bob's school day."""
 
 print('Your choice will impact the outcome of the game')
