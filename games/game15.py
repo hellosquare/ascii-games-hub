@@ -1,7 +1,4 @@
-#ThirdCheckpoint - Ms. Christine
-#check that enemy health doesn't go in the negatives
-#add error checking
-
+#final
 #-----CONSTANT-----#
 EnemyStartingHealth = 50
 BossStartingHealth = 200
@@ -18,7 +15,7 @@ health = 100
 import sys
 import time
 
-def typewriter(text, speed=0.04):
+def typewriter(text, speed=0.03):
     for character in text:
         sys.stdout.write(character)
         sys.stdout.flush()
@@ -145,6 +142,9 @@ def fight_enemy(enemy_name, enemy_health, victory_message, friend_name=""):
 
 
 #-----EVENT 1-----#
+event2_complete = False
+event3_complete = False
+
 if playerSuperpower in ("Fire ball", "Spider web"):
     print(r'''⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠓⠒⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⠀⠀⠀⠀⠀⢠⢤⣤⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -185,6 +185,7 @@ if health > 0 and playerSuperpower == "Fire ball":
     typewriter("A message on the gate says, 'The princess is trapped in the highest tower.'")
     typewriter("At the castle gate, an armored guard blocks your rescue mission.")
     if fight_enemy("castle guard", EnemyStartingHealth, "You defeated the guard and can enter the castle!"):
+        event2_complete = True
         typewriter("You race up the tower and find the princess locked behind an iron door.")
         typewriter("With one powerful Fire ball, you melt the lock and free her!")
         typewriter("The princess thanks you for your bravery, and the kingdom celebrates your heroic rescue!")
@@ -245,4 +246,8 @@ if health > 0 and event3_complete:
         if fight_enemy("Treasure Dragon", BossStartingHealth, "You defeated the Treasure Dragon!"):
             typewriter("You open the final chest and discover gold, jewels, and an ancient crown!")
             typewriter("You found the legendary treasure and became the richest adventurer alive!")
+<<<<<<< HEAD
+            typewriter("YOU WIN!") 
+=======
             typewriter("YOU WIN!")
+>>>>>>> 2198905aeb55ec4b1f5896ffd9454d5e2af31003
