@@ -93,8 +93,6 @@ def start_game():
     ~~~~
 
             ''')
-=======
->>>>>>> 7e4152ad2211dee4438bc701759e1363c610bb54
             typewriter("You picked a hero with a power!")
             break
         else:
