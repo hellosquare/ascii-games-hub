@@ -93,22 +93,6 @@ if choiceOne == "1":
         print("restart the game")
 
 elif choiceOne == "2":
-    print("""              ~.
-           Ya...___|__..aab     .   .
-            Y88a  Y88o  Y88a   (     )
-             Y88b  Y88b  Y88b   `.oo'
-             :888  :888  :888  ( (`-'
-    .---.    d88P  d88P  d88P   `.`.
-   / .-._)  d8P'"""|"""'-Y8P      `.`.
-  ( (`._) .-.  .-. |.-.  .-.  .-.   ) )
-   \ `---( O )( O )( O )( O )( O )-' /
-    `.    `-'  `-'  `-'  `-'  `-'  .' CJ
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-          
-          
-""")
-    
-    
     print ("you have chosen the pirate ship, you earn 10 coins")
     coins = coins + 10
     print("coins:" + str(coins))
