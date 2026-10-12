@@ -1,4 +1,9 @@
-#final
+#Third Checkpoint - Ms. Christine
+#lets add some places where you can track the players quality and coins - these need to be printed out during the game
+#you are missing the choices for fruit cake
+#add ASCII art
+#add error checking for invalid answers
+
 #IMPORT
 import time
 import sys
@@ -138,11 +143,9 @@ if dessert_choice =="1":
 print("Mixing the cake batter!")
 try:
     speed = int(input("How fast do you want to mix the batter? (1-10):"))
-    except ValueError:
+except ValueError:
         print("Invalid input! Please enter a number between 1 and 10.")
         speed = int(input("How fast do you want to mix the batter? (1-10):"))
-   
-    else:
         if speed < 5:
             dessert_quality *= 0.9
             print("You mixed too slowly! (Quality *0.9)")
@@ -176,8 +179,8 @@ else:
         print("Perfect! It smells so good!(Quality +20)")
         dessert_quality += 20.0
 
-elif dessert_choice == "2":
-    dessert = "Cookies"
+    elif dessert_choice == "2":
+      dessert = "Cookies"
     dessert_quality += 8.0
     print("Yay! Cookies! (Quality +8)")
 
@@ -258,4 +261,3 @@ else:
 
 print(f"Chef {player_name}, you have finished making the {dessert}!")
 print(f"You put the {dessert} in the display and it is ready to be served!")
-
