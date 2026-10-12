@@ -71,12 +71,7 @@ if choiceEventOne == "1" :
         trials = trials -1
         print("you have "+ str(trials) + "tries left to get the correct ingredients for your dish ")
 
-    print("time to choose the next ingredient:")
-    elif secondchoice == "2":
-        print("you have chosen expired seaweed sheets that are moldy and smelly")
-        trials = trials -1
-        print("you have " + str(trials) + " tries left to get the correct ingredients for your dish")
-        
+
     print("time to choose the next ingredient - it is salmon")
     print("now you can choose the type of salmon") 
     print("1= delicious fresh salmon / 2= expired salmon that is moldy and smelly")
@@ -183,10 +178,10 @@ if choiceEventOne == "1" :
     doughchoice = input("Type 1 or 2:  "). strip(). lower()
 
     if choiceEventOne == "1" : 
-    print("you are going to make pizza today- pizza - today") 
-    print("now you can choose the type of pizza dough") 
-    print("1= fresh dough / 2= stale dough that is expired.")
-    doughchoice = input("Type 1 or 2:  "). strip(). lower()
+         print("you are going to make pizza today- pizza - today") 
+         print("now you can choose the type of pizza dough") 
+         print("1= fresh dough / 2= stale dough that is expired.")
+         doughchoice = input("Type 1 or 2:  "). strip(). lower()
 
     
     print("now you can choose the type of pizza sauce") 
@@ -207,44 +202,43 @@ if choiceEventOne == "1" :
         trials = trials -1
         print("you have "+ str(trials) + "tries left to get the correct ingredients for your dish ")
 
-         
-                
-            print("time to choose the next ingredient - it is pizza sauce ")
-            print("now you can choose the type of pizza sauce") 
-            print("1= delicious fresh pizza sauce / 2= expired pizza sauce that is moldy and smelly")
+print("time to choose the next ingredient - it is pizza sauce ")
+print("now you can choose the type of pizza sauce") 
+print("1= delicious fresh pizza sauce / 2= expired pizza sauce that is moldy and smelly")
             
-            thirdchoice = input("Type 1 or 2:  "). strip(). lower()
+thirdchoice = input("Type 1 or 2:  "). strip(). lower()
                 
-            if thirdchoice == "1= deloicious fresh pizza sauce":
-                print("you have chosen delicious fresh pizza sauce that is fresh and tasty")
-                print("congrates continue picking the ingredients for your dish please continue to the next step ")
-                elif thirdchoice == "2= expired pizza sauce":
-                        print("you have chosen expired pizza sauce that is moldy and smelly")
-                        print("you lost beacause you picked the wrong choice for pizza sauce ")
-                
-                        
-                    print("time to choose the next ingredient - it is pizza topping ")
-                    print("now you can choose the type of topping") 
-                    print("1= fresh pepperoni / 2= expired pepperoni that are moldy and smelly")
-                    toppingchoice = input("Type 1 or 2:  "). strip(). lower()
+if thirdchoice == "1= deloicious fresh pizza sauce":
+    print("you have chosen delicious fresh pizza sauce that is fresh and tasty")
+    print("congrates continue picking the ingredients for your dish please continue to the next step ")
+        
+elif thirdchoice == "2= expired pizza sauce":
+    print("you have chosen expired pizza sauce that is moldy and smelly")
+    print("you lost beacause you picked the wrong choice for pizza sauce ")
+    
+            
+    print("time to choose the next ingredient - it is pizza topping ")
+    print("now you can choose the type of topping") 
+    print("1= fresh pepperoni / 2= expired pepperoni that are moldy and smelly")
+    toppingchoice = input("Type 1 or 2:  "). strip(). lower()
 
-                if toppingchoice == "1":
-                        print("you have chosen fresh pepperoni that is delicious")
-                        print("congrats continue picking the ingredients for your dish")
-                        
-                         #what happens here after - does the player get awarded or punished for choosing good or bad - make sure you count up points here
-                    elif toppingchoice == ("2"):
-                        print("you have chosen way too much pepperoni that is too much!!!!")
-                        print("you lost you had literally failed the dish !!")
+    if toppingchoice == "1":
+        print("you have chosen fresh pepperoni that is delicious")
+        print("congrats continue picking the ingredients for your dish")
+                    
+                        #what happens here after - does the player get awarded or punished for choosing good or bad - make sure you count up points here
+    elif toppingchoice == ("2"):
+        print("you have chosen way too much pepperoni that is too much!!!!")
+        print("you lost you had literally failed the dish !!")
 
-          fourthchoice == input("type 1 or 2: "). strip(). lower()
+fourthchoice == input("type 1 or 2: "). strip(). lower()
 
 if fourthchoice == "2=deloicious fresh Mozzarella cheese":
     print("you have chosen delicious Mozzarella cheese on the top of your pizza")
-print("congrats you have finish your dish ！！its absolutely delicious")
+    print("congrats you have finish your dish ！！its absolutely delicious")
 elif fourthchoice == "2= mozzarella cheese that are improper cold storage before use":
-                        print("you have chosen improper cold storage for your cheese")
-                        print("you lost beacause you picked the wrong choice for your pizza ")
+    print("you have chosen improper cold storage for your cheese")
+    print("you lost beacause you picked the wrong choice for your pizza ")
 
 #TACOCHOICES
 if choiceEventOne == "1" : 
@@ -271,10 +265,11 @@ if choiceEventOne == "1" :
         print("you have "+ str(trials) + "tries left to get the correct ingredients for your dish ")
 
     print("time to choose the next ingredient:")
-    elif secondchoice == "2":
-        print("you have chosen expired lettuce that are moldy and smelly")
-        trials = trials -1
-        print("you have " + str(trials) + " tries left to get the correct ingredients for your dish")
+
+elif secondchoice == "2":
+    print("you have chosen expired lettuce that are moldy and smelly")
+    trials = trials -1
+    print("you have " + str(trials) + " tries left to get the correct ingredients for your dish")
         
     print("time to choose the next ingredient - it is salsa")
     print("now you can choose the type of salsa you like ") 
@@ -289,15 +284,3 @@ if choiceEventOne == "1" :
     elif thirdchoice == "2= expired salsa":
         print("you have chosen expired salsa that is absolutely disgusting")
         print("you have lost the whole entire game because you have picked the wrong ingredients for your dish.")
-
-
-
-
-
-                        
-                
-                          
-
-
-
-
