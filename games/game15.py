@@ -246,8 +246,6 @@ if health > 0 and event3_complete:
         if fight_enemy("Treasure Dragon", BossStartingHealth, "You defeated the Treasure Dragon!"):
             typewriter("You open the final chest and discover gold, jewels, and an ancient crown!")
             typewriter("You found the legendary treasure and became the richest adventurer alive!")
-<<<<<<< HEAD
             typewriter("YOU WIN!") 
-=======
             typewriter("YOU WIN!")
->>>>>>> 2198905aeb55ec4b1f5896ffd9454d5e2af31003
+
