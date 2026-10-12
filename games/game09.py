@@ -74,7 +74,7 @@ def start_game():
             break
         elif characterchoice == "2":
             superpower = "Super power"
-<<<<<<< HEAD
+
             print(r'''
      /\
     // \
