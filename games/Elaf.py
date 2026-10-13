@@ -1,4 +1,8 @@
 #final
+
+#imports
+import time
+
 # -------- CONSTANTS ----------
 PLAYER_STARTING_COINS = 200
 GHOSTS_DAMAGE = 20
@@ -28,6 +32,7 @@ print("""
           MOMENT OF TRUTH
 ================================
 """)
+time.sleep(3)
 
 print(r"""    .
                             !!!!!!!
@@ -66,6 +71,7 @@ jgs|^| ^  |================|^   | ^ ^^ ^ |  ^ ||
 PlayerName = input("what is your name?: ")
 
 print(" welcome detective ", PlayerName, '--')
+time.sleep(3)
 print(r"""___
     .:---:.         _
 // #   \\_...--'' \
@@ -76,46 +82,45 @@ jgs  ':===:'
 """)
 
 print("you start with" + str(coins) + "coins")
-print()
-print()
-print()
+time.sleep(2)
+
 print("welcome to the huanted mansion...") 
+time.sleep(2)
 print("you have enterd a mysterious house filled with secret, strage noise, and wandering goshts.")
+time.sleep(2)
 print("Explore the rooms , collect coins and search for clues to uncover the truth.")
+time.sleep(2)
 print("you only have 5 minuets to solve the mystery, good luck!")
-print()
-print()
-print()
+time.sleep(2)
 print(" IN ORDER TO WIN YOU HAVE TO FIND THE MURDERER AND HAVE AT LEAST 250 COINS AT THE END OF THE GAME")
-print()
-print()
-print()
+time.sleep(2)
 print("Make sure you remember these information")
-print()
-print()
-print()
+time.sleep(2)
+
 print("there are 3 supspect the witch, a ninja and a vampire")
+time.sleep(5)
 print(" Now these are the clues the companion left you.")
-print()
+time.sleep(2)
 print("Clue 1-the murdere was wearing a all black outfit.")
 print("Clue 2 - the murdere shoe size is 39.")
 print("Clue 3 - the murder has black hair")
+time.sleep(5)
     
 while True:
     print("Are you ready to make your first decision?")
-    print()
+    time.sleep(2)
     print("1. A simple blue door with a round handle. It looks clean and bright")
-    print()
+    time.sleep(2)
     print("or 2'. A dark red door with a round handle also but it looks scary and damaged ")
     doorchoice = input(" which door do you choose: type red or blue?:").strip().lower()
 
     if doorchoice == "blue":
         print("you slowly open the blue door. A bright light shines from inside.")
-        print()
+        time.sleep(2)
         print("you walk into a samll quite room.there is a table in the middle with a box on it")
-        print()
+        time.sleep(2)
         print("you open the box and see lots of gold coins. you count them carefully.")
-        print()
+        time.sleep(2)
         print(" THERE ARE 50 coins! you take the coins and leave the room happily")
         coins = coins + 50
         break
@@ -123,10 +128,11 @@ while True:
     elif doorchoice == "red":
 
         print("you slowly open the red door. It creaks loudly...")
-        print()
-        print(" you enter a dark and spooky room")
+        time.sleep(2)
+        print("you enter a dark and spooky room")
+        time.sleep(2)
         print("oh theres a box under a table.")
-        print()
+        time.sleep(2)
         openingboxchoice = input(" Do you open the box type YES or NO").upper().strip()
 
         if openingboxchoice == "YES":
@@ -146,9 +152,11 @@ while True:
 
 while True:        
     print(" Now time for the second decision")
-    
+    time.sleep(5)
     print("1. A black box")
+    time.sleep(2)
     print("2. A pink box")
+    time.sleep(2)
     print(r"""    _   _
      ((\o/))
 .-----//^\\-----.
@@ -169,11 +177,11 @@ while True:
     
     elif boxchoice == "pink":
         print("yayy you got a clue")
-        print()
+        time.sleep(2)
         print(" But make sure all the clues the compianion provide you won't forget")
-        print()
+        time.sleep(2)
         print("the clue is that the murderer carrys lots of weapons.")
-        print()
+        time.sleep(2)
         print(r"""/()
                 / /
                / /
@@ -187,26 +195,25 @@ while True:
         break
 
 print("moving on...")
-print()
-print()
+time.sleep(5)
 
 while True:
     print("woww you encounterd 50 coins. Do you want to take the risk and accept the coins")
     coinchoice = input(" YES or NO").strip().upper()
     if coinchoice == "YES":
         print(" you take the coins and leave the room.")
-        print()
+        time.sleep(2)
         coins = coins + 50
         print("You now have: " + str(coins) + "coins")
-        print()
+        time.sleep(2)
         
         print(" Sadly you encounterd a ghost down the hall.")
-        print()
+        time.sleep(2)
         print("What do you want to do?")
-        print()
+        time.sleep(2)
         print("1. loose 75 coins")
         print("2 Pay 150 to escape")
-        print()
+        time.sleep(2)
         print("You now have: " + str(coins) + "coins")
         
         escapechoice = input(" what do you choose to do? type 1 or 2").strip()
@@ -227,7 +234,7 @@ while True:
     
     elif coinchoice == "NO":
         print(" you get a clue.")
-        print()
+        time.sleep(5)
         print("THE NINJA SHOE SIZE IS 39 , THE WITCH SHOE SIZE IS 38 AND THE VAMPAIRE SHOE SIZE IS 40")
         break
     
@@ -239,7 +246,7 @@ while True:
     
     if guesschoice == "yes":
         print("Your choices are the ninja, the witch, or the vampire.")
-        print()
+        time.sleep(5)
         guess = input("Who do you think it is? type ninja or witch or vampire").strip().lower()
         
         if guess == "ninja":
@@ -270,8 +277,7 @@ while True:
 
 while finalguessdeny == True:
     print("OMGG you found 2 shiney boxes. One is golden and the other is silver. You can only choose one box.")
-    print()
-    print()
+    time.sleep(2)
     print("1. Golden box")
     print("2. Silver box")
     print(r"""    _   _
@@ -308,11 +314,13 @@ while finalguessdeny == True:
 
 while finalguessdeny == True and gameover == False:
     print("You have followed the clues this far...")
+    time.sleep(2)
     print("Now, there is only one thing left to do.")
+    time.sleep(2)
     print("It is the moment of truth.")
-    print()
+    time.sleep(2)
     print("Who is the murderer?")
-    print()
+    time.sleep(2)
     print("1. Ninja")
     print("2. Witch")
     print("3. Vampire")
@@ -320,13 +328,13 @@ while finalguessdeny == True and gameover == False:
     
     if murderchoice == "1":
         print("You chose the Ninja.")
-        print()
+        time.sleep(2)
         print("Everyone goes silent.")
-        print()
+        time.sleep(2)
         print("The truth is finally revealed...")
-        print()
+        time.sleep(2)
         print("THE NINJA WAS THE MURDERER!")
-        print()
+        time.sleep(2)
         print(" GOOD JOB! You solved the mystery!")
         print(r"""       *****************
                ******               ******
@@ -356,28 +364,39 @@ while finalguessdeny == True and gameover == False:
 
     elif murderchoice == "2":
         print("You chose the Witch.")
-        print()
+        time.sleep(2)
         print("Everyone looks at you in silence.")
-        print()
+        time.sleep(2)
         print("But you made the wrong choice.")
-        print()
+        time.sleep(2)
         print("The Witch was innocent.")
-        print()
+        time.sleep(2)
         print("The real murderer escapes...")
-        print()
+        time.sleep(2)
         print("GAME OVER!!")
         gameover = True
+        print(r'''
+            .-""""""-.
+           .'          '.
+          /   O      O   \
+         :           `    :
+         |                |   
+         :    .------.    :
+          \  '        '  /
+           '.          .'
+             '-......-'
+        ''')
         break
 
     elif murderchoice == "3":
         print("You chose the Vampire.")
-        print()
+        time.sleep(2)
         print("The room suddenly goes silent.")
-        print()
+        time.sleep(2)
         print("NOO  you made the wrong choice.")
-        print()
+        time.sleep(2)
         print("The Vampire was innocent.")
-        print()
+        time.sleep(2)
         print("The real murderer escapes...")
         print("GAME OVER!!")
         gameover = True
@@ -386,12 +405,11 @@ while finalguessdeny == True and gameover == False:
    .'          '.
   /   O      O   \
  :           `    :
- |                |   sad
+ |                |   
  :    .------.    :
   \  '        '  /
    '.          .'
-jgs  '-......-'
-
+     '-......-'
 ''')
         break
 
