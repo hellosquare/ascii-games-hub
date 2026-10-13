@@ -1,4 +1,3 @@
-#final
 import random, time
 print("=" * 75)
 print("                              THE TOWER OF DOOM")
@@ -23,17 +22,23 @@ print("1. Knight  (Health: 3, Damage: 2, Speed: 1)")
 print("2. Archer  (Speed: 3,  Health: 2, Damage: 1)")
 print("3. Witch / Wizard  (Damage: 3, Speed: 2,  Health: 1)")
 print("4. Robot   (Health: 2, Damage: 2, Speed: 2)")
-jobs = {"knight": (3, 2, 1), "archer": (2, 1, 3), "witch": (1, 3, 2), "wizard": (1, 3, 2), "robot": (2, 2, 2)}
 while True:
-    characterJob = input("What would you set your character's job? ").lower()
-    if characterJob in jobs:
-        p_health, p_damage, p_speed = jobs[characterJob]
+    job_choice = input("Enter 1, 2, 3, or 4: ")
+    if job_choice == "1":
+        characterJob, p_health, p_damage, p_speed = "knight", 3, 2, 1
         break
-    print("Please pick Knight, Archer, Witch/Wizard, or Robot.")
+    elif job_choice == "2":
+        characterJob, p_health, p_damage, p_speed = "archer", 2, 1, 3
+        break
+    elif job_choice == "3":
+        characterJob, p_health, p_damage, p_speed = "witch", 1, 3, 2
+        break
+    elif job_choice == "4":
+        characterJob, p_health, p_damage, p_speed = "robot", 2, 2, 2
+        break
+    print("Please type in 1, 2, 3, or 4.")
 if characterJob == "witch" and characterGender == "male":
     display_job = "Wizard"
-elif characterJob == "wizard" and characterGender == "female":
-    display_job = "Witch"
 else:
     display_job = characterJob.capitalize()
 print()
@@ -82,7 +87,7 @@ def math_challenge():
             num1 = num2 * random.randint(1, 12)
             correct_answer, symbol = num1 // num2, "÷"
         try:
-            user_answer = int(input(f"What is {num1} {symbol} {num2}? "))
+            user_answer = int(input(f"What is {num1} {symbol} {num2} = ?"))
         except ValueError:
             user_answer = None
         if user_answer == correct_answer:
