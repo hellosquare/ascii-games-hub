@@ -32,6 +32,8 @@ dessert_quality = 50.0
 
 # Boolean - Special topping status
 has_special_topping = False
+chooseCake = False
+chooseCookies = False
 
 # ============================
 # Decision 1: Choose Cake Or Cookies (Main Branch)
@@ -41,6 +43,7 @@ print("2.Cookies")
 dessert_choice = input("Enter 1 or 2:")
 
 if dessert_choice =="1":
+    chooseCake = True
     dessert = "Cake"
     dessert_quality += 10.0 
     print("Yay! A Cake! (Quality +10)\n")
@@ -139,52 +142,12 @@ if dessert_choice =="1":
         dessert_quality += 5.0
         print(f"Cheap ingredients bought! Coins left: {coins}, Quality: {dessert_quality}")
 
-# Mix Batter
-print("Mixing the cake batter!")
-try:
-    speed = int(input("How fast do you want to mix the batter? (1-10):"))
-except ValueError:
-        print("Invalid input! Please enter a number between 1 and 10.")
-        speed = int(input("How fast do you want to mix the batter? (1-10):"))
-        if speed < 5:
-            dessert_quality *= 0.9
-            print("You mixed too slowly! (Quality *0.9)")
-        elif speed > 8:
-            dessert_quality *= 0.8
-            print("You mixed too fast! (Quality *0.8)")
-        else:
-            dessert_quality *= 1.1
-            print("Perfect mixing speed! (Quality *1.1)")
-
-# Bake Cake
-print("Put the cake in the oven!")
-try:
-    temp = int(input("Set oven temperature (200-500) degrees Fahrenheit):"))
-    bake_time = int(input("Set bake time (10-60 minutes):"))
-except ValueError:
-    print("Invalid input! Please enter valid numbers for temperature and bake time.")
-    temp = int(input("Set oven temperature (200-500) degrees Fahrenheit:"))
-    bake_time = int(input("Set bake time (10-60 minutes):"))
-
-if temp > 400:
-    if bake_time > 40:
-        print("Oh no! Too hot and too long! The cake is burnt!")
-        dessert_quality -= 40.0
-        print(f"Quality: {dessert_quality}")
-elif temp < 250:
-    print("Too cold! It did not rise. It is flat")
-    dessert_quality -= 20.0
-else:
-    if bake_time >= 25 and bake_time <=35:
-        print("Perfect! It smells so good!(Quality +20)")
-        dessert_quality += 20.0
-
-    elif dessert_choice == "2":
-      dessert = "Cookies"
+elif dessert_choice == "2":
+    chooseCookies = True
+    dessert = "Cookies"
     dessert_quality += 8.0
     print("Yay! Cookies! (Quality +8)")
-
-   
+    
     print("What flavor of cookies?")
     print("1.Chocolate Chip Cookies")
     print("2.Oatmeal Cookies")
@@ -206,11 +169,11 @@ else:
             add_raisins = input("Do you want to add raision? (yes/no):").lower()
 
             if add_raisins == "yes":
-                dessert_quality == 10.0
+                dessert_quality += 10.0
                 has_special_topping =True
                 print("Raisins added! (Quality +10)")
 
-        else:
+        elif cookie_choice =="3":
             dessert = "Sugar Cookies"
             print("Sweet Sugar Cookies")
             add_frosting = input("Do you want to add frosting? (yes/no):").lower()
@@ -218,6 +181,9 @@ else:
                 dessert_quality += 15.0
                 has_special_topping = True
                 print("Frosting added! (Quality +15)")
+
+        else:
+            print("Invalid choice. No special flavor selected.")
 
     # Choose Cookie Shape
     print("What shape do you want your cookies to be?")
@@ -236,28 +202,90 @@ else:
         dessert_quality += 7.0
         print("Heart-shaped cookies! (Quality +7)")
 
-# Bake Cookies
-print("Put the cookies in the oven!")
-try:
-    temp = int(input("Set oven temperature (200-500) degrees Fahrenheit):"))
-    bake_time = int(input("Set bake time (10-60 minutes):"))
-except ValueError:
-    print("Invalid input! Please enter valid numbers for temperature and bake time.")
-    temp = int(input("Set oven temperature (200-500) degrees Fahrenheit:"))
-    bake_time = int(input("Set bake time (10-60 minutes):"))
+# Mix Batter
+while chooseCake == True:
+    print("Mixing the cake batter!")
+    try:
+        speed = int(input("How fast do you want to mix the batter? (1-10):"))
+        break
+    
+    except ValueError:
+        print("Invalid input! Please enter a number between 1 and 10.")
+        speed = int(input("How fast do you want to mix the batter? (1-10):"))
+        if speed < 5:
+            dessert_quality *= 0.9
+            print("You mixed too slowly! (Quality *0.9)")
+            break
 
-if temp > 400:
-    if bake_time > 40:
-        print("Oh no! Too hot and too long! The cake is burnt!")
-        dessert_quality -= 40.0
-        print(f"Quality: {dessert_quality}")
-elif temp < 250:
-    print("Too cold! It did not rise. It is flat")
-    dessert_quality -= 20.0
-else:
-    if bake_time >= 25 and bake_time <=35:
-        print("Perfect! It smells so good!(Quality +20)")
-        dessert_quality += 20.0
+        elif speed > 8:
+            dessert_quality *= 0.8
+            print("You mixed too fast! (Quality *0.8)")
+            break
+
+        else:
+            dessert_quality *= 1.1
+            print("Perfect mixing speed! (Quality *1.1)")
+            break
+
+# Bake Cake
+while chooseCake == True:
+    print("Put the cake in the oven!")
+    try:
+        temp = int(input("Set oven temperature (200-500) degrees Fahrenheit):"))
+        bake_time = int(input("Set bake time (10-60 minutes):"))
+        break
+    
+    except ValueError:
+        print("Invalid input! Please enter valid numbers for temperature and bake time.")
+        temp = int(input("Set oven temperature (200-500) degrees Fahrenheit:"))
+        bake_time = int(input("Set bake time (10-60 minutes):"))
+        break
+        
+        if temp > 400 and bake_time > 40:
+            print("Oh no! Too hot and too long! The cake is burnt!")
+            dessert_quality -= 40.0
+            print(f"Quality: {dessert_quality}")
+            break
+                
+        elif temp < 250:
+            print("Too cold! It did not rise. It is flat")
+            dessert_quality -= 20.0
+            print(f"Quality: {dessert_quality}")
+            break
+            
+        elif bake_time >= 25 and bake_time <=35:
+            print("Perfect! It smells so good!(Quality +20)")
+            dessert_quality += 20.0
+            print(f"Quality: {dessert_quality}")
+            break
+            
+
+# Bake Cookies
+while chooseCookies == True:
+    print("Put the cookies in the oven!")
+    try:
+        temp = int(input("Set oven temperature (200-500) degrees Fahrenheit):"))
+        bake_time = int(input("Set bake time (10-60 minutes):"))
+        break
+
+    except ValueError:
+        print("Invalid input! Please enter valid numbers for temperature and bake time.")
+        temp = int(input("Set oven temperature (200-500) degrees Fahrenheit:"))
+        bake_time = int(input("Set bake time (10-60 minutes):"))
+        
+        if temp > 400:
+            if bake_time > 40:
+                print("Oh no! Too hot and too long! The cake is burnt!")
+                dessert_quality -= 40.0
+                print(f"Quality: {dessert_quality}")
+                
+            elif temp < 250:
+                print("Too cold! It did not rise. It is flat")
+                dessert_quality -= 20.0
+                
+            elif bake_time >= 25 and bake_time <=35:
+                print("Perfect! It smells so good!(Quality +20)")
+                dessert_quality += 20.0
 
 print(f"Chef {player_name}, you have finished making the {dessert}!")
 print(f"You put the {dessert} in the display and it is ready to be served!")
