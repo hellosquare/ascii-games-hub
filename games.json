@@ -1,5 +1,5 @@
 [
-  {"id":1,"title":"Code Red","file":"games/game01.py"},
+  {"id":1,"title":"Code Red","file":"games/Harry.py"},
   {"id":2,"title":"Arena","file":"games/game02.py"},
   {"id":3,"title":"Kitchen of Riddles","file":"games/game03.py"},
   {"id":4,"title":"Flipped World","file":"games/game04.py"},
