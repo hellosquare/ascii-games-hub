@@ -1,5 +1,5 @@
-#final
 import time
+import random
 
 # Player Variables
 player = {
@@ -72,7 +72,7 @@ def level_add1():
 
 # run the tutorial
 def tutorial():
-  global player, prot
+  global player, prot, bot1, bot2
 
   dummy.HP = dummy.MHP
   player["shield"] = 0
@@ -102,6 +102,7 @@ def tutorial():
     elif player["HP"] <= 0:
       print("wasted")
       player["HP"] = player["maxHP"]
+      player["level"] -= 1
       break
     
     else:
@@ -151,6 +152,41 @@ def tutorial():
 
           dummy.HP -= player["damage"]
           print(f"dealt {player['damage']} damage to {dummy.name}")
+          print("-----------------------------------------")
+          print("    Welcome to the tutorial/freeplay")
+          print("-----------------------------------------")
+          print("introduce ; Basics, offense cause damage to the opponent, defense gives you an effect that protects you for 50% from 3 enemy's attacks")
+          print("""
+         _______
+        |       |
+        |  -_-  |
+        |_______|
+           ||
+      _____||_____
+     |            |
+     |            |
+     |            |
+     |____________|
+           ||
+        ___||___
+       |________|
+""") 
+          print(f"Enemy: {dummy.name}")
+          print(f"HP {dummy.HP}/{dummy.MHP} - Lv. {dummy.level}")
+          print()
+          print("You")
+          print(f"HP {player['HP']}/{player['maxHP']} - Lv. {player['level']}")
+          print()
+          print("Status :")
+          if len(player["status"]) >= 1:
+            print(player["status"])
+          else:
+            print("nothing")
+          print("1.offense")
+          print("2.defense")
+          print("0.run")
+          print("-----------------------------------------")
+          time.sleep(0.5)
 
           if player["shield"] >= 1:
             player["HP"] -= dummy.DMG * prot
@@ -208,18 +244,18 @@ def trainer_bot():
       print("-----------------------------------------")
       print("wasted")
       player["HP"] = player["maxHP"]
+      player["level"] -= 1
       break
 
     else:
       if player["shield"] <= 0 and "Damage Reduction" in player["status"]:
         player["status"].remove("Damage Reduction")
 
-#Hi Steven, maybe you could have multiple poses for your trainer bot (different expressions) and have it loop through them so it would make the game more interesting and interactive! cool game though :)
       print("-----------------------------------------")
       print("       Welcome to the Trainer Bot")
       print("-----------------------------------------")
       print("introduce ; Enemies fights back")
-      print("""  
+      print("""
         .---------.
        |  O     O  |
        |     ▫     |
@@ -255,6 +291,38 @@ def trainer_bot():
 
           trainer.HP -= player["damage"]
           print(f"dealt {player['damage']} damage to {trainer.name}")
+          print("-----------------------------------------")
+          print("       Welcome to the Trainer Bot")
+          print("-----------------------------------------")
+          print("introduce ; Enemies fights back")
+          print("""
+      .---------.
+     |  -     -  |
+     |     ▫     |
+     |  -------  |
+      '---------'
+         /|\\
+        / | \\
+       /  |  \\
+         / \\
+        /   \\
+""")
+          print(f"Enemy: {trainer.name}")
+          print(f"HP {trainer.HP}/{trainer.MHP} - DMG {trainer.DMG} - Lv. {trainer.level}")
+          print()
+          print("You")
+          print(f"HP {player['HP']}/{player['maxHP']} - Lv. {player['level']}")
+          print()
+          print("Status :")
+          if len(player["status"]) >= 1:
+            print(player["status"])
+          else:
+            print("nothing")
+          print("1.offense")
+          print("2.defense")
+          print("0.run")
+          print("-----------------------------------------")
+          time.sleep(0.5)
 
           if player["shield"] >= 1:
             player["HP"] -= trainer.DMG * prot
