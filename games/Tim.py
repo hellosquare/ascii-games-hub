@@ -1,11 +1,29 @@
-#final
+#Third and Final Checkpoint - Ms. Christine
+#please make sure you check that player stats are being printed out at every decision - like when the player is losing or adding HP, make sure you print those values out as well. 
+#this is in line 148, 165, 170ish... and onwards
+#also double check your operators whether they should be plus or minus
+
 import random as r
-
-print("")
-print("")
-
+round = 1
+crystals = 100
+hp = 50
+event3 = 0  
+s = 0
+shield = r.randint ( 0 , 5 )
+health_potion = r.randint ( 0 , 5 )
 player = input("what is your character name ? ")
 health = 50
+
+print("Here are your stats, " + player)
+print ("hp = " , hp )
+print ("crystals = " , crystals )
+end = 0
+
+
+print("")
+print("")
+
+
 
 print("")
 
@@ -28,24 +46,16 @@ print ("")
 print ("Control your ship to move up and down, \n collect green crystals for points, and avoid red obstacles. \n The longer you survive, the higher your score.(you need to get 250 crystals to win this game)")
 print("")
 
-#VARIABLES - this should be at the very top
-round = 1
-crystals = 100
-hp = 50
-s = 0
-shield = r.randint ( 0 , 5 )
-health_potion = r.randint ( 0 , 5 )
 
-print("Here are your stats, " + player)
-print ("hp = " , hp )
-print ("crystals = " , crystals )
-end = 0
 
 while 1 :
    
     print("----------------------------")
+    print("----------------------------")
+    print("----------------------------")
 
-
+    print("")
+    print("")
     print("")
     print("")
     print ("Round " , round )
@@ -129,9 +139,9 @@ ______________________________
             print ()
             print ()
             print ()
-            mine = input ( "you can choose where do you want go: \n 1) normal mine \n 2) The Chaotic Star-Falling Mine ( more dangerous!! but several harvest!!!! )")
+            mine = int (input ( "you can choose where do you want go: \n 1) normal mine \n 2) The Chaotic Star-Falling Mine ( more dangerous!! but several harvest!!!! )") )
             print("")
-            x = r.randint ( 1 , 4 )
+            x = r.randint ( 1 , 5 )
             if mine == 1 :
                 if x > 1 :
             
@@ -143,7 +153,7 @@ ______________________________
                 else :
                     print ( " ohhhh no , space pirates avoid you !! You lose 20 HP ><  ")
                     hp -= 20
-                    print("""                                     _
+                    print("""                                     
   (  +____________________/\\/\\___ / /|
    .''._____________'._____      / /|/\\
   : () :              :\\ ----\\|    \\ )
@@ -159,19 +169,19 @@ ______________________________
                                          
                 """)
                     if s >= 1 :
-                        hp += 20 #should this be lose or minus
+                        hp += 20 
                         s -= 1
 
             else :
                 if x > 3 :
                             
-                    collect = r.randint( 50 , 1000 )
+                    collect = r.randint( 50 , 100 )
                     crystals += collect
                 
                     print ( "  let's go !! you collect " , collect , "crystals !!!!!" )
                                 
                 else :
-                    print ( " ohhhh no , space pirates avoid you !! You lose 20 HP ><  " ) #this should say HP instead of ph - also is it possible to have pnly 2 random choice - pirates get you or you are safe, you have 3 random choices here so the likelihood of attack is greater
+                    print ( " ohhhh no , space pirates avoid you !! You lose 40 HP ><  " ) #this should say HP instead of ph - also is it possible to have only 2 random choice - pirates get you or you are safe, you have 3 random choices here so the likelihood of attack is greater
                     hp -= 40
                     print("""        _
    (  +____________________/\\/\\___ / /|
@@ -189,22 +199,79 @@ ______________________________
                             
                                 """)
                     if s >= 1 :
-                        hp += 20 #should this be lose or minus
+                        hp += 40 
                         s -= 1
             print("")  
 
     elif event == 3 :
+        event3 += 1
         print (" you skip this round , nothing happend...")
+        if event3 == 5 :
+            print ("")
+            print ("")
+            print (" coward win !!", player , " !! coward win!!"  )
+            print("""        
+                                                                      .
+                                              /|
+                         ____...,---.___..__,) |
+   ,_.-._   ,._,.--''''''                   ' ;
+  /      '-'                               ) /
+,'_._.    `_                             ,' :
+      `-.   -.                    _     '  ;
+        )`-.  `.     /;          ) )   ,' / 
+         '. `.  -.  (  \\        | =' .'  ;
+           `. '-._+ .\\= \\.-'-'-.| ; /  :'
+             `.    \\ `-        `.+'  ;
+      .-.      `. ,-+,' = _  (_  ;  .'
+      ; (_      /: =,(    O\\  O  ).J
+      `. =`.   ;'  =\\ \\     7P   ' 
+        `-. '-: .' = \\ \\  (:  :) )
+           `--| ;   = `.`. `=="./
+              ; :       `-`.__.' )
+              : |                ;
+              '.'.=  -.     .    +
+           ,'`)  :=    \\    ,  /  `.
+           ) =|   `.   ,+-.-'-+.    ;.
+           ; \\:   /|   | ;      `._  =)
+          :  ( `-' |   (/  kOs     ;  ;
+          ( |;    (:    )          |  :
+           `-     / )|  ;          )  |)
+                 (_/ `-'            `-'
+
+                    
+                        """)  
+            break
+
 
     if ( crystals >= 250 ) :
         print ("")
         print ("")
         print (" you win !!", player , " !! LET'S GOOOO!"  )
-        pass
+        print("""        _
+                                     .=.,
+            ;c =\\
+          __|  _/
+        .'-'-._/-'-._
+       /..   ____    \\
+      /' _  [<_->] )  \\
+     (  / \\--\\_>/-/'._ )
+      \\-;_/\\__;__/ _/ _/
+       '._}|==o==\\{_\\/
+        /  /-._.--\\  \\_
+       // /   /|   \\ \\ \\
+      / | |   | \\;  |  \\ \\
+     / /  | :/   \\: \\   \\_\\
+    /  |  /.'|   /: |    \\ \\
+    |  |  |--| . |--|     \\_\\
+    / _/   \\ | : | /___--._) \\
+   |_(---'-| >-'-| |       '-'
+snd       /_/     \\_\\
+
+        
+            """)  
+        break
 
     if hp <= 0 or round >= 15 :
-        print (" you lose" +player + "!!!" )
-        
 
         print("""        _
                      ,.-" "-.,
@@ -235,7 +302,7 @@ ______________________________
             |             |             |          |
             \\__|__|__|__/ \\__|__|__|__/ \\_|__|__/
 
-    """)
-        break   
-        print (" you lose" +player + "!!!" )
+    """)  
+        print (" you lose  fw" +player + "!!!" )
         break 
+           
