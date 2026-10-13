@@ -1,4 +1,15 @@
-#final
+#Third and Final Checkpoint - final feedback
+#make sure you have the labels as comments for your imports, constants, variables, and other game states so the code is easy to read 
+#between line 65-66 and on lines 360 ish , make sure you have an error checking system in case the students put in the wrong number value (for choosing LAPD, NYPD, or LVPD or FD)
+#the error checking system can be an else statement can be encased within a Boolean / whileTrue which says print("Invalid choice, please enter 1,2, 3") or something like that
+#in line 339 (for the hard level, the question with the exponents is too hard for grade 4 or 5 - so consider making it slightly easier or having hints)
+
+#variabes
+characterLocation = ""
+characterName = ""
+characterType = ""
+liability = ""
+xp = ""
 RED = "\033[31m"
 GREEN = "\033[32m"
 YELLOW = "\033[33m"
@@ -15,7 +26,14 @@ def typewriter(text, delay=0.02):
 #print(f"{RED}红色文字{RESET}")
 import time
 
-text = "WELCOME"
+text = (r"""
+██╗    ██╗███████╗██╗      ██████╗ ██████╗ ███╗   ███╗███████╗
+██║    ██║██╔════╝██║     ██╔════╝██╔═══██╗████╗ ████║██╔════╝
+██║ █╗ ██║█████╗  ██║     ██║     ██║   ██║██╔████╔██║█████╗  
+██║███╗██║██╔══╝  ██║     ██║     ██║   ██║██║╚██╔╝██║██╔══╝  
+╚███╔███╔╝███████╗███████╗╚██████╗╚██████╔╝██║ ╚═╝ ██║███████╗
+ ╚══╝╚══╝ ╚══════╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝
+""")
 for _ in range(5):
     print(f"\r{text}", end="", flush=True)
     time.sleep(0.3)
@@ -51,7 +69,28 @@ while True:
     print (f"You typed: {liability}", ". Please check your spelling and re-enter 'understand', if not please exit the game.")
 
 print ("")
-print ("===CHARACTER-CREATE-SYSTEM===")
+print(r"""
+ ██████╗██╗  ██╗ █████╗ ██████╗  █████╗  ██████╗████████╗███████╗██████╗
+██╔════╝██║  ██║██╔══██╗██╔══██╗██╔══██╗██╔════╝╚══██╔══╝██╔════╝██╔══██╗
+██║     ███████║███████║██████╔╝███████║██║        ██║   █████╗  ██████╔╝
+██║     ██╔══██║██╔══██║██╔══██╗██╔══██║██║        ██║   ██╔══╝  ██╔══██╗
+╚██████╗██║  ██║██║  ██║██║  ██║██║  ██║╚██████╗   ██║   ███████╗██║  ██║
+ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝   ╚═╝   ╚══════╝╚═╝  ╚═╝
+
+ ██████╗██████╗ ███████╗ █████╗ ████████╗███████╗
+██╔════╝██╔══██╗██╔════╝██╔══██╗╚══██╔══╝██╔════╝
+██║     ██████╔╝█████╗  ███████║   ██║   █████╗
+██║     ██╔══██╗██╔══╝  ██╔══██║   ██║   ██╔══╝
+╚██████╗██║  ██║███████╗██║  ██║   ██║   ███████╗
+ ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝
+
+ ███████╗██╗   ██╗███████╗ ████████╗███████╗███╗   ███╗
+██╔════╝╚██╗ ██╔╝██╔════╝  ╚══██╔══╝██╔════╝████╗ ████║
+███████╗ ╚████╔╝ ███████╗     ██║   █████╗  ██╔████╔██║
+╚════██║  ╚██╔╝      ║██║     ██║   ██╔══╝  ██║╚██╔╝██║
+███████║   ██║   ███████║     ██║   ███████╗██║ ╚═╝ ██║
+╚══════╝   ╚═╝   ╚══════╝     ╚═╝   ╚══════╝╚═╝     ╚═╝
+""")
 typewriter ("Welcome Players, please give your character a name:")
 characterName = input("")
 print ("")
@@ -61,13 +100,18 @@ xp = 100
 characterType = int(input())
 if characterType == 1:
     typewriter ("Welcome Officer " + characterName + ". Now please enter a number that represents your department location.\n1.LAPD\n2.NYPD\n3.LVPD")
-    characterLocation = int(input())
-    if characterLocation == 1:
-        typewriter ("Welcome Officer " + characterName + " from the LAPD. Your XP point will be 100, when the XP point reach 0, game lose.")
-    if characterLocation == 2:
-        typewriter ("Welcome Officer " + characterName + " from the NYPD. Your XP point will be 100, when the XP point reach 0, game lose.")
-    if characterLocation == 3:
+    while True:
+        characterLocation = int(input())
+    
+        if characterLocation == 1:
+            typewriter ("Welcome Officer " + characterName + " from the LAPD. Your XP point will be 100, when the XP point reach 0, game lose.")
+        if characterLocation == 2:
+            typewriter ("Welcome Officer " + characterName + " from the NYPD. Your XP point will be 100, when the XP point reach 0, game lose.")
+        if characterLocation == 3:
             typewriter ("Welcome Officer " + characterName + " from the LVPD. Your XP point will be 100, when the XP point reach 0, game over.")
+
+            break
+        print ("Please input a valid number!")
 
     print ("")
     print ("===!!CHARACTER IMOFRMATION!!===")
@@ -366,244 +410,336 @@ if characterType == 1:
 if characterType == 2:
     typewriter ("Welcome Officer " + characterName + ". Now, please enter a number that represents your department location.\n1.LAFD\n2.NYFD\n3.LVFD")
     characterLocation = int(input())
-    if characterLocation == 1:
-        typewriter ("Welcome Officer " + characterName + " from the LAFD. Your XP point will be 100, when the XP point reach 0, game lose.")
-    if characterLocation == 2:
-        typewriter ("Welcome Officer " + characterName + " from the NYFD. Your XP point will be 100, when the XP point reach 0, game lose.")
-    if characterLocation == 3:
-            typewriter ("Welcome Officer " + characterName + " from the LVFD. Your XP point will be 100, when the XP point reach 0, game over.")
 
-    print ("")
-    print ("===!!CHARACTER IMOFRMATION!!===")
-    typewriter ("Officer " + characterName)
-    print ("XP:", xp)
-    print("")
-    print ("Press Enter to start.")
-    input ()
+while True:
+        characterType = int(input())
+    
+        if characterLocation == 1:
+            typewriter ("Welcome Officer " + characterName + " from the LAPD. Your XP point will be 100, when the XP point reach 0, game lose.")
+        if characterLocation == 2:
+            typewriter ("Welcome Officer " + characterName + " from the NYPD. Your XP point will be 100, when the XP point reach 0, game lose.")
+        if characterLocation == 3:
+            typewriter ("Welcome Officer " + characterName + " from the LVPD. Your XP point will be 100, when the XP point reach 0, game over.")
+
+            break
+        print ("Please input a valid number!")
+
+print ("")
+print ("===!!CHARACTER IMOFRMATION!!===")
+typewriter ("Officer " + characterName)
+print ("XP:", xp)
+print("")
+print ("Press Enter to start.")
+input ()
+import time
+
+def wave_bar(width=20):
+    pos = 0
+    direction = 1
+    for _ in range(40):
+        bar = [" "] * width
+        bar[pos] = "▬"
+        print(f"\r|{''.join(bar)}|", end="", flush=True)
+        pos += direction
+        if pos >= width-1:
+            direction = -1
+        if pos <= 0:
+            direction = 1
+        time.sleep(0.08)
+    print("\r" + " "* (width+2))
+
+wave_bar()
+
+typewriter ("▬▬▬▬▬ GAME START ▬▬▬▬▬")
+typewriter ("Welcome! You have total 17 team members, as a captain please memorize this very carefully!")
+input ()
+typewriter (f"▬▬▬ Mission 1 ▬▬▬\nThere is a fire reported at mid-wilshire, please {RED}assign number {RESET}of members you bring to the scene.")
+memberNumber = int(input())
+if memberNumber < 18:
+    typewriter ("Member assigned! XP + 5")
+    xp = xp + 5
+    print (f"XP = {xp}")        
+else:
+    typewriter ("Member failed to assign, reach the available members! XP - 10!!!")
+    xp = xp - 10
+    typewriter (f"XP = {xp}")
+
+typewriter ("Member(s) arrived the scene, please enter 'water' to spot the fire.")
+while True:
+    pdstop = input("")
+
+    if pdstop == "water":
+        print("")
+        typewriter("Fire under control, code 4.")
+        xp = xp + 5
+        print (f"XP = {xp}")
+        break
+    
+    print ("")    
+    xp = xp - 10
+    if xp > 0:
+        print ("Fire still on, try again!")
+        print (f"XP = {xp}")
+    else:
+        text = (r"""
+ ██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗ 
+██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗
+██║  ███╗███████║██╔████╔██║█████╗      ██║   ██║██║   ██║█████╗  ██████╔╝
+██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗
+╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║
+ ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝
+""")
+        for _ in range(5):
+            print(f"\r{text}", end="", flush=True)
+            time.sleep(0.3)
+            print("\r" + " "*len(text), end="", flush=True)
+            time.sleep(0.3)
+        exit()
+
+typewriter ("Before we start Mission 2, please select a difficulty")
+print ("1. Easy Mode\n2. Hard Mode")
+fdlevel = int(input("Please enter a number:"))
+if fdlevel == 1:
+    typewriter ("▬▬▬ Easy Mode Slected ▬▬▬")
     import time
 
-    def wave_bar(width=20):
-        pos = 0
-        direction = 1
-        for _ in range(40):
-            bar = [" "] * width
-            bar[pos] = "▬"
-            print(f"\r|{''.join(bar)}|", end="", flush=True)
-            pos += direction
-            if pos >= width-1:
-                direction = -1
-            if pos <= 0:
-                direction = 1
-            time.sleep(0.08)
-        print("\r" + " "* (width+2))
+    def dot_loading(msg="Processing"):
+        for i in range(1, 12):
+            dots = "." * (i % 20)
+            print(f"\r{msg}{dots}", end="", flush=True)
+            time.sleep(0.2)
+        print(f"\r{msg} COMPLETE    ")
 
-    wave_bar()
+    dot_loading("LOADING")
 
-    typewriter ("▬▬▬▬▬ GAME START ▬▬▬▬▬")
-    typewriter ("Welcome! You have total 17 team members, as a captain please memorize this very carefully!")
-    input ()
-    typewriter (f"▬▬▬ Mission 1 ▬▬▬\nThere is a fire reported at mid-wilshire, please {RED}assign number {RESET}of members you bring to the scene.")
-    memberNumber = int(input())
-    if memberNumber < 18:
-        typewriter ("Member assigned! XP + 5")
-        xp = xp + 5
-        print (f"XP = {xp}")        
-    else:
-        typewriter ("Member failed to assign, reach the available members! XP - 10!!!")
-        xp = xp - 10
-        typewriter (f"XP = {xp}")
-
-    typewriter ("Member(s) arrived the scene, please enter 'water' to spot the fire.")
+    print ("▬▬▬ Mission 2-1 ▬▬▬")
+    print(r'''
+                        __    _
+                _wr""        "-q__
+                _dP                 9m_
+            _#P                     9#_
+            d#@                       9#m
+            d##                         ###
+        J###                         ###L
+        {###K                       J###K
+        ]####K      ___aaa___      J####F
+    __gmM######_  w#P""   ""9#m  _d#####Mmw__
+    _g##############mZ_         __g##############m_
+_d####M@PPPP@@M#######Mmp gm#########@@PPP9@M####m_
+a###""          ,Z"#####@" '######"\g          ""M##m
+J#@"             0L  "*##     ##@"  J#              *#K
+#"               `#    "_gmwgm_~    dF               `#_
+7F                 "#_   ]#####F   _dK                 JE
+]                    *m__ ##### __g@"                   F
+                    "PJ#####LP"
+`                       0######_                      '
+                    _0########_
+    .               _d#####^#####m__              ,
+    "*w_________am#####P"   ~9#####mw_________w*"
+        ""9@#####@M""           ""P@#####@M""
+''')
+    typewriter ("Chemical leackage: Hydrochloric acid (HCl) found leak in a chemical factory")
+    typewriter ("Control: Use some base chemical to neutralize it.")
+    input ("")
+    typewriter ("Your priority is to use proper chemical to address the scene, please enter 'base' to neutralize the leaking chemical.")
     while True:
-        pdstop = input("")
-    
-        if pdstop == "water":
-            print("")
-            typewriter("Fire under control, code 4.")
-            xp = xp + 5
-            print (f"XP = {xp}")
+        neutralize = input ("Enter here:")
+
+        if neutralize == "base":
+            def dot_loading(msg="Processing"):
+                for i in range(1, 12):
+                    dots = "." * (i % 20)
+                    print(f"\r{msg}{dots}", end="", flush=True)
+                    time.sleep(0.2)
+                print(f"\r{msg} Processing    ")
+
+            dot_loading("Processing")
+            xp = xp + 15
+            print (f"Final XP = {xp}")
             break
-        
-        print ("")    
+
+        print("")
+        print(f"You typed: {neutralize}, Please check your spelling! XP - 10")
         xp = xp - 10
         if xp > 0:
-            print ("Fire still on, try again!")
+            print ("Try again!")
             print (f"XP = {xp}")
         else:
-            text = "=== GAME OVER ==="
+            text = (r"""
+ ██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗ 
+██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗
+██║  ███╗███████║██╔████╔██║█████╗      ██║   ██║██║   ██║█████╗  ██████╔╝
+██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗
+╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║
+ ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝
+""")
             for _ in range(5):
                 print(f"\r{text}", end="", flush=True)
                 time.sleep(0.3)
                 print("\r" + " "*len(text), end="", flush=True)
                 time.sleep(0.3)
             exit()
+    
+    typewriter (r"""
+ ██████╗  █████╗ ███╗   ███╗███████╗     █████╗  ██████╗ ██████╗ ███╗   ███╗██████╗ ██╗     ██╗███████╗██╗  ██╗███████╗██████╗ 
+██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔══██╗██╔════╝██╔═══██╗████╗ ████║██████╔╝██║     ██║██╔════╝██║ ██╔╝██╔════╝██╔══██╗
+██║  ███╗███████║██╔████╔██║█████╗      ███████║██║     ██║   ██║██╔████╔██║██╔═══╝ ██║     ██║███████╗█████╔╝ █████╗  ██████╔╝
+██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██╔══██║██║     ██║   ██║██║╚██╔╝██║██║     ██║     ██║╚════██║██╔═██╗ ██╔══╝  ██╔══██╗
+╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ██║  ██║╚██████╗╚██████╔╝██║ ╚═╝ ██║███████╗███████╗██║███████║██║  ██╗███████╗██║  ██║
+ ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝    ╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝╚══════╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
+""")
+    text = (r"""
+ ██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██████╗ ███╗   ███╗██████╗ ██╗     ███████╗████████╗███████╗
+██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔════╝██╔═══██╗████╗ ████║██╔══██╗██║     ██╔════╝╚══██╔══╝██╔════╝
+██║  ███╗███████║██╔████╔██║█████╗      ██║     ██║   ██║██╔████╔██║██████╔╝██║     █████╗     ██║   █████╗
+██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██║     ██║   ██║██║╚██╔╝██║██╔═══╝ ██║     ██╔══╝     ██║   ██╔══╝
+╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╗╚██████╔╝██║ ╚═╝ ██║██║     ███████╗███████╗   ██║   ███████╗
+ ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝     ╚══════╝╚══════╝   ╚═╝   ╚══════╝
+""")
+    for _ in range(5):
+        print(f"\r{text}", end="", flush=True)
+        time.sleep(0.3)
+        print("\r" + " "*len(text), end="", flush=True)
+        time.sleep(0.3)
+    print("\rTHANKS FOR PLAYING!")
 
-    typewriter ("Before we start Mission 2, please select a difficulty")
-    print ("1. Easy Mode\n2. Hard Mode")
-    fdlevel = int(input("Please enter a number:"))
-    if fdlevel == 1:
-        typewriter ("▬▬▬ Easy Mode Slected ▬▬▬")
-        import time
 
-        def dot_loading(msg="Processing"):
-            for i in range(1, 12):
-                dots = "." * (i % 20)
-                print(f"\r{msg}{dots}", end="", flush=True)
-                time.sleep(0.2)
-            print(f"\r{msg} COMPLETE    ")
 
-        dot_loading("LOADING")
 
-        print ("▬▬▬ Mission 2-1 ▬▬▬")
-        print(r'''
-                         __    _
-                    _wr""        "-q__
-                 _dP                 9m_
-               _#P                     9#_
-              d#@                       9#m
-             d##                         ###
-            J###                         ###L
-            {###K                       J###K
-            ]####K      ___aaa___      J####F
-        __gmM######_  w#P""   ""9#m  _d#####Mmw__
-     _g##############mZ_         __g##############m_
-   _d####M@PPPP@@M#######Mmp gm#########@@PPP9@M####m_
-  a###""          ,Z"#####@" '######"\g          ""M##m
- J#@"             0L  "*##     ##@"  J#              *#K
- #"               `#    "_gmwgm_~    dF               `#_
+
+if fdlevel == 2:
+    typewriter ("▬▬▬ Hard Mode Slected ▬▬▬")
+    import time
+
+    def dot_loading(msg="Processing"):
+        for i in range(1, 12):
+            dots = "." * (i % 20)
+            print(f"\r{msg}{dots}", end="", flush=True)
+            time.sleep(0.2)
+        print(f"\r{msg} COMPLETE    ")
+
+    dot_loading("LOADING")
+    print ("▬▬▬ Mission 2-2 ▬▬▬")
+    print(r'''
+                        __    _
+                _wr""        "-q__
+                _dP                 9m_
+            _#P                     9#_
+            d#@                       9#m
+            d##                         ###
+        J###                         ###L
+        {###K                       J###K
+        ]####K      ___aaa___      J####F
+    __gmM######_  w#P""   ""9#m  _d#####Mmw__
+    _g##############mZ_         __g##############m_
+_d####M@PPPP@@M#######Mmp gm#########@@PPP9@M####m_
+a###""          ,Z"#####@" '######"\g          ""M##m
+J#@"             0L  "*##     ##@"  J#              *#K
+#"               `#    "_gmwgm_~    dF               `#_
 7F                 "#_   ]#####F   _dK                 JE
 ]                    *m__ ##### __g@"                   F
-                       "PJ#####LP"
- `                       0######_                      '
-                       _0########_
-     .               _d#####^#####m__              ,
-      "*w_________am#####P"   ~9#####mw_________w*"
-          ""9@#####@M""           ""P@#####@M""
+                    "PJ#####LP"
+`                       0######_                      '
+                    _0########_
+    .               _d#####^#####m__              ,
+    "*w_________am#####P"   ~9#####mw_________w*"
+        ""9@#####@M""           ""P@#####@M""
 ''')
-        typewriter ("Chemical leackage: Hydrochloric acid (HCl) found leak in a chemical factory")
-        typewriter ("Control: Use some base chemical to neutralize it.")
-        input ("")
-        typewriter ("Your priority is to use proper chemical to address the scene, please enter 'base' to neutralize the leaking chemical.")
-        while True:
-            neutralize = input ("Enter here:")
-
-            if neutralize == "base":
-                def dot_loading(msg="Processing"):
-                    for i in range(1, 12):
-                        dots = "." * (i % 20)
-                        print(f"\r{msg}{dots}", end="", flush=True)
-                        time.sleep(0.2)
-                    print(f"\r{msg} Processing    ")
-
-                dot_loading("Processing")
-                xp = xp + 15
-                print (f"Final XP = {xp}")
-                break
-
-            print("")
-            print(f"You typed: {neutralize}, Please check your spelling! XP - 10")
-            xp = xp - 10
-            if xp > 0:
-                print ("Try again!")
-                print (f"XP = {xp}")
-            else:
-                text = "=== GAME OVER ==="
-                for _ in range(5):
-                    print(f"\r{text}", end="", flush=True)
-                    time.sleep(0.3)
-                    print("\r" + " "*len(text), end="", flush=True)
-                    time.sleep(0.3)
-                exit()
+    typewriter ("Chemical Factory: Hydrochloric acid (HCl) found leakage with container A11-02.")
+    typewriter ("Control: Please use proper chemical to address the leakage.")
+    input ("")
+    typewriter ("Enter a number that represents your action:\n1. Use Sulfuric Acid (H₂SO₄).\n2. Sodium bicarbonate (NaHCO₃)\n3. Liquid Bromine (Br)")
+    negotiation = int(input("Enter a valid number please:"))
+    if negotiation == 1:
+        print ("Great heat released, hydrogen chloride (HCl) vapor occur, a corrosive vapor. XP-50!!!")
+        xp = xp -50
+        if xp < 1:
+            print(r"""
+ ██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗ 
+██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗
+██║  ███╗███████║██╔████╔██║█████╗      ██║   ██║██║   ██║█████╗  ██████╔╝
+██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗
+╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║
+ ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝
+""")
+            print (f"XP = {xp}")
+            exit()
         
-        typewriter ("▬▬▬▬ MISSION ACCOMPLISHED ▬▬▬▬")
-        text = "▬▬▬▬ GAME COMPLETED ▬▬▬▬"
+        if xp > 0:
+            print(r"""
+ ██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗ 
+██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗
+██║  ███╗███████║██╔████╔██║█████╗      ██║   ██║██║   ██║█████╗  ██████╔╝
+██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗
+╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║
+ ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝
+""")
+            print (f"XP = {xp}")
+            exit()
+    if negotiation == 2:
+        print ("You had successful neutralized the leaked acid! XP + 50")
+        xp = xp + 50
+        print(r"""
+ ██████╗  █████╗ ███╗   ███╗███████╗     █████╗  ██████╗ ██████╗ ███╗   ███╗██████╗ ██╗     ██╗███████╗██╗  ██╗███████╗██████╗ 
+██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔══██╗██╔════╝██╔═══██╗████╗ ████║██████╔╝██║     ██║██╔════╝██║ ██╔╝██╔════╝██╔══██╗
+██║  ███╗███████║██╔████╔██║█████╗      ███████║██║     ██║   ██║██╔████╔██║██╔═══╝ ██║     ██║███████╗█████╔╝ █████╗  ██████╔╝
+██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██╔══██║██║     ██║   ██║██║╚██╔╝██║██║     ██║     ██║╚════██║██╔═██╗ ██╔══╝  ██╔══██╗
+╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ██║  ██║╚██████╗╚██████╔╝██║ ╚═╝ ██║███████╗███████╗██║███████║██║  ██╗███████╗██║  ██║
+ ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝    ╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝╚══════╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
+""")
+        print (f"Final XP = {xp}")
+        text = (r"""
+ ██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██████╗ ███╗   ███╗██████╗ ██╗     ███████╗████████╗███████╗
+██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔════╝██╔═══██╗████╗ ████║██╔══██╗██║     ██╔════╝╚══██╔══╝██╔════╝
+██║  ███╗███████║██╔████╔██║█████╗      ██║     ██║   ██║██╔████╔██║██████╔╝██║     █████╗     ██║   █████╗
+██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██║     ██║   ██║██║╚██╔╝██║██╔═══╝ ██║     ██╔══╝     ██║   ██╔══╝
+╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╗╚██████╔╝██║ ╚═╝ ██║██║     ███████╗███████╗   ██║   ███████╗
+ ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝     ╚══════╝╚══════╝   ╚═╝   ╚══════╝
+""")
         for _ in range(5):
             print(f"\r{text}", end="", flush=True)
             time.sleep(0.3)
             print("\r" + " "*len(text), end="", flush=True)
             time.sleep(0.3)
-        print("\rTHANKS FOR PLAYING!")
+        print("\r")
+        print(r"""
+████████╗██╗  ██╗ █████╗ ███╗   ██╗██╗  ██╗███████╗
+╚══██╔══╝██║  ██║██╔══██╗████╗  ██║██║ ██╔╝██╔════╝
+   ██║   ███████║███████║██╔██╗ ██║█████╔╝ ███████╗
+   ██║   ██╔══██║██╔══██║██║╚██╗██║██╔═██╗ ╚════██║
+   ██║   ██║  ██║██║  ██║██║ ╚████║██║  ██╗███████║
+   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚══════╝
 
-
-
-    
-    
-    if fdlevel == 2:
-        typewriter ("▬▬▬ Hard Mode Slected ▬▬▬")
-        import time
-
-        def dot_loading(msg="Processing"):
-            for i in range(1, 12):
-                dots = "." * (i % 20)
-                print(f"\r{msg}{dots}", end="", flush=True)
-                time.sleep(0.2)
-            print(f"\r{msg} COMPLETE    ")
-
-        dot_loading("LOADING")
-        print ("▬▬▬ Mission 2-2 ▬▬▬")
-        print(r'''
-                         __    _
-                    _wr""        "-q__
-                 _dP                 9m_
-               _#P                     9#_
-              d#@                       9#m
-             d##                         ###
-            J###                         ###L
-            {###K                       J###K
-            ]####K      ___aaa___      J####F
-        __gmM######_  w#P""   ""9#m  _d#####Mmw__
-     _g##############mZ_         __g##############m_
-   _d####M@PPPP@@M#######Mmp gm#########@@PPP9@M####m_
-  a###""          ,Z"#####@" '######"\g          ""M##m
- J#@"             0L  "*##     ##@"  J#              *#K
- #"               `#    "_gmwgm_~    dF               `#_
-7F                 "#_   ]#####F   _dK                 JE
-]                    *m__ ##### __g@"                   F
-                       "PJ#####LP"
- `                       0######_                      '
-                       _0########_
-     .               _d#####^#####m__              ,
-      "*w_________am#####P"   ~9#####mw_________w*"
-          ""9@#####@M""           ""P@#####@M""
-''')
-        typewriter ("Chemical Factory: Hydrochloric acid (HCl) found leakage with container A11-02.")
-        typewriter ("Control: Please use proper chemical to address the leakage.")
-        input ("")
-        typewriter ("Enter a number that represents your action:\n1. Use Sulfuric Acid (H₂SO₄).\n2. Sodium bicarbonate (NaHCO₃)\n3. Liquid Bromine (Br)")
-        negotiation = int(input("Enter a valid number please:"))
-        if negotiation == 1:
-            print ("Great heat released, hydrogen chloride (HCl) vapor occur, a corrosive vapor. XP-50!!!")
-            xp = xp -50
-            if xp < 1:
-                print ("▬▬▬ GAME LOSE ▬▬▬")
-                print (f"XP = {xp}")
-                exit()
-            
-            if xp > 0:
-                print ("▬▬▬ GAME OVER ▬▬▬")
-                print (f"XP = {xp}")
-                exit()
-        if negotiation == 2:
-            print ("You had successful neutralized the leaked acid! XP + 50")
-            xp = xp + 50
-            typewriter ("▬▬▬▬ MISSION ACCOMPLISHED ▬▬▬▬")
-            print (f"Final XP = {xp}")
-            text = "▬▬▬▬ GAME COMPLETED ▬▬▬▬"
-            for _ in range(5):
-                print(f"\r{text}", end="", flush=True)
-                time.sleep(0.3)
-                print("\r" + " "*len(text), end="", flush=True)
-                time.sleep(0.3)
-            print("\rTHANKS FOR PLAYING!")
-        if negotiation == 3:
-            ("Extremely dangerous corrosive and toxic brown bromine vapor form! Caution!")
-            xp = xp -50
-            if xp < 1:
-                print ("▬▬▬ GAME LOSE ▬▬▬")
-                print (f"XP = {xp}")
-                exit()
-            
-            if xp > 0:
-                print ("▬▬▬ GAME OVER ▬▬▬")
-                print (f"XP = {xp}")
-                exit()
+███████╗ ██████╗ ██████╗     ██████╗ ██╗       █████╗ ██╗   ██╗██╗███╗   ██╗ ██████╗ 
+██╔════╝██╔═══██╗██╔══██╗    ██╔══██╗██║      ██╔══██╗╚██╗ ██╔╝██║████╗  ██║██╔════╝
+█████╗  ██║   ██║██████╔╝    ██████╔╝██║      ███████║ ╚████╔╝ ██║██╔██╗ ██║██║  ███╗
+██╔══╝  ██║   ██║██╔══██╗    ██╔═══╝ ██║      ██╔══██║  ╚██╔╝  ██║██║╚██╗██║██║   ██║
+██║     ╚██████╔╝██║  ██║    ██║     ███████╗██║  ██║   ██║   ██║██║ ╚████║╚██████╔╝
+╚═╝      ╚═════╝ ╚═╝  ╚═╝    ╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝   ╚═╝╚═╝  ╚═══╝ ╚═════╝
+""")
+    if negotiation == 3:
+        ("Extremely dangerous corrosive and toxic brown bromine vapor form! Caution!")
+        xp = xp -50
+        if xp < 1:
+            print(r"""
+ ██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗ 
+██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗
+██║  ███╗███████║██╔████╔██║█████╗      ██║   ██║██║   ██║█████╗  ██████╔╝
+██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗
+╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║
+ ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝
+""")
+            print (f"XP = {xp}")
+            exit()
+        
+        if xp > 0:
+            print(r"""
+ ██████╗  █████╗ ███╗   ███╗███████╗     ██████╗ ██╗   ██╗███████╗██████╗ 
+██╔════╝ ██╔══██╗████╗ ████║██╔════╝    ██╔═══██╗██║   ██║██╔════╝██╔══██╗
+██║  ███╗███████║██╔████╔██║█████╗      ██║   ██║██║   ██║█████╗  ██████╔╝
+██║   ██║██╔══██║██║╚██╔╝██║██╔══╝      ██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗
+╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗    ╚██████╔╝ ╚████╔╝ ███████╗██║  ██║
+ ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝     ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝
+""")
+            print (f"XP = {xp}")
+            exit()
