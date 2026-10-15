@@ -370,7 +370,3 @@ while True:
  
     except ValueError:
         print("Please enter 1 or 2")
-has context menu
-
-
-has context menu
